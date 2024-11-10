@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Cooperativa.Models.Ahorros>
+
+@{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @* @Html.DisplayNameFor(model => model.montoAhorro) *@
+                <label> Monto de ahorro</label>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.comprobante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaAhorro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.detalleAhorro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.socio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.montoAhorro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.comprobante)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaAhorro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.detalleAhorro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.socio)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ahorroID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ahorroID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ahorroID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

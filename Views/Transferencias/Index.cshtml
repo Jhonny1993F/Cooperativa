@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Cooperativa.Models.Transferencias>
+
+@{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cantidadTransferencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaTransferencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.detalleTransferencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cliente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cantidadTransferencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaTransferencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.detalleTransferencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cliente)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.transferenciaID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.transferenciaID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.transferenciaID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

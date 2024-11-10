@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Cooperativa.Models.Utilidades>
+
+@{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.utilidadTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.utilidadPorSocio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaUtilidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.socio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.inscripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.interes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.totalCredito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.costoEvento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.montoAhorro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.costoPasivo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.utilidadTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.utilidadPorSocio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaUtilidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.socio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.inscripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.interes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.totalCredito)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.costoEvento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.montoAhorro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.costoPasivo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.utilidadID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.utilidadID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.utilidadID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

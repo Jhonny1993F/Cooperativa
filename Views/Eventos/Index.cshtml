@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Cooperativa.Models.Eventos>
+
+@{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaEvento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tipoEvento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.costoEvento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.detalleEvento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lugar)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.socio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaEvento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipoEvento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.costoEvento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.detalleEvento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lugar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.socio)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.eventoID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.eventoID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.eventoID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

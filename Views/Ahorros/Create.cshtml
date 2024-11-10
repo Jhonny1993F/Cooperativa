@@ -1,0 +1,59 @@
+﻿@model Cooperativa.Models.Ahorros
+
+@{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Ahorros</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @* <label asp-for="montoAhorro" class="control-label"></label> *@
+                <label> monto ahorro</label>
+                <input asp-for="montoAhorro" class="form-control" />
+                <span asp-validation-for="montoAhorro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="comprobante" class="control-label"></label>
+                <input asp-for="comprobante" class="form-control" />
+                <span asp-validation-for="comprobante" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Fecha de Ahorro</label>
+                <input type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" readonly />
+                @Html.HiddenFor(m => m.fechaAhorro, new { Value = DateTime.Now }) <!-- Campo oculto para la fecha -->
+            </div>
+            <div class="form-group">
+                <label asp-for="detalleAhorro" class="control-label"></label>
+                <input asp-for="detalleAhorro" class="form-control" />
+                <span asp-validation-for="detalleAhorro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="socio" class="control-label"></label>
+                @* <input asp-for="socio" class="form-control" /> *@
+                <select asp-for="socio" class="form-control" asp-items="ViewBag.socio"></select>
+                <span asp-validation-for="socio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

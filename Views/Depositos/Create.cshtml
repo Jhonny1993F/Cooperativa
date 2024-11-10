@@ -1,0 +1,52 @@
+﻿@model Cooperativa.Models.Depositos
+
+@{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Depositos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="cliente" class="control-label"></label>
+                <select asp-for="cliente" class="form-control" asp-items="ViewBag.cliente"></select>
+                <span asp-validation-for="cliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cantidadDeposito" class="control-label"></label>
+                <input asp-for="cantidadDeposito" class="form-control" />
+                <span asp-validation-for="cantidadDeposito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Fecha de Deposito</label>
+                <input type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" readonly />
+                @Html.HiddenFor(m => m.fechaDeposito, new { Value = DateTime.Now }) <!-- Campo oculto para la fecha -->
+            </div>
+            <div class="form-group">
+                <label asp-for="detalleDeposito" class="control-label"></label>
+                <input asp-for="detalleDeposito" class="form-control" />
+                <span asp-validation-for="detalleDeposito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,327 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = Cooperativa
+build_property.RootNamespace = Cooperativa
+build_property.ProjectDir = C:\Users\Jhonny Montero\Documents\Visual Studio 2022\Proyectos\Cooperativa\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Jhonny Montero\Documents\Visual Studio 2022\Proyectos\Cooperativa
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Administrador/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5pc3RyYWRvclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Ahorros/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWhvcnJvc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Ahorros/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWhvcnJvc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Ahorros/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWhvcnJvc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Ahorros/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWhvcnJvc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Ahorros/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWhvcnJvc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Bancos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuY29zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Bancos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuY29zXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Bancos/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuY29zXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Bancos/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuY29zXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Bancos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFuY29zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Clientes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Clientes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Clientes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Clientes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Clientes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Creditos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3JlZGl0b3NcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Creditos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3JlZGl0b3NcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Creditos/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3JlZGl0b3NcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Creditos/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3JlZGl0b3NcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Creditos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ3JlZGl0b3NcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Depositos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwb3NpdG9zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Depositos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwb3NpdG9zXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Depositos/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwb3NpdG9zXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Depositos/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwb3NpdG9zXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Depositos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwb3NpdG9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Eventos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRvc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Eventos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRvc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Eventos/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRvc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Eventos/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRvc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Eventos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRvc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/General/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2VuZXJhbFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Logins/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5zXExvZ2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Logins/LoginClientes.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5zXExvZ2luQ2xpZW50ZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/PasivosClientes/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFzaXZvc0NsaWVudGVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/PasivosClientes/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFzaXZvc0NsaWVudGVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/PasivosClientes/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFzaXZvc0NsaWVudGVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/PasivosClientes/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFzaXZvc0NsaWVudGVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/PasivosClientes/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFzaXZvc0NsaWVudGVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Pasivos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFzaXZvc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Pasivos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFzaXZvc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Pasivos/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFzaXZvc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Pasivos/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFzaXZvc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Pasivos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFzaXZvc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Retiros/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV0aXJvc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Retiros/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV0aXJvc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Retiros/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV0aXJvc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Retiros/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV0aXJvc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Retiros/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmV0aXJvc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Shared/AdministradorLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEFkbWluaXN0cmFkb3JMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Shared/GeneralLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEdlbmVyYWxMYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Shared/UsuarioLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFVzdWFyaW9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Socios/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29jaW9zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Socios/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29jaW9zXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Socios/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29jaW9zXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Socios/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29jaW9zXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Socios/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU29jaW9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Transferencias/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhbnNmZXJlbmNpYXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Transferencias/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhbnNmZXJlbmNpYXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Transferencias/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhbnNmZXJlbmNpYXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Transferencias/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhbnNmZXJlbmNpYXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Transferencias/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhbnNmZXJlbmNpYXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Usuario/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Utilidades/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXRpbGlkYWRlc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Utilidades/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXRpbGlkYWRlc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Utilidades/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXRpbGlkYWRlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Utilidades/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXRpbGlkYWRlc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Utilidades/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXRpbGlkYWRlc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Jhonny Montero/Documents/Visual Studio 2022/Proyectos/Cooperativa/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-52yhcy4i33

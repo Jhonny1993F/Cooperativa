@@ -1,0 +1,58 @@
+﻿@model Cooperativa.Models.PasivosClientes
+
+@{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>PasivosClientes</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="tipo" class="control-label"></label>
+                <input asp-for="tipo" class="form-control" />
+                <span asp-validation-for="tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="costoPasivo" class="control-label"></label>
+                <input asp-for="costoPasivo" class="form-control" />
+                <span asp-validation-for="costoPasivo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="detallePasivo" class="control-label"></label>
+                <input asp-for="detallePasivo" class="form-control" />
+                <span asp-validation-for="detallePasivo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>FechaPasivo</label>
+                <input type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" readonly />
+                @Html.HiddenFor(m => m.fechaPasivo, new { Value = DateTime.Now }) <!-- Campo oculto para la fecha -->
+            </div>
+            <div class="form-group">
+                <label asp-for="cliente" class="control-label"></label>
+                @* <input asp-for="cliente" class="form-control" /> *@
+                <select asp-for="cliente" class="form-control" asp-items="ViewBag.cliente"></select>
+                <span asp-validation-for="cliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

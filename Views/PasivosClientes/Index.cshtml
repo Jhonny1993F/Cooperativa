@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Cooperativa.Models.PasivosClientes>
+
+@{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.costoPasivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.detallePasivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fechaPasivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cliente)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.costoPasivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.detallePasivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fechaPasivo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cliente)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.pasivoClienteID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.pasivoClienteID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.pasivoClienteID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
