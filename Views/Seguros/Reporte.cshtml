@@ -1,0 +1,26 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+}
+
+<h2>Reporte de Seguros</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tipo</th>
+            <th>Total de Seguros</th>
+            <th>Valor Promedio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reporte in Model)
+        {
+            <tr>
+                <td>@reporte.Tipo</td>
+                <td>@reporte.TotalSeguros</td>
+                <td>@String.Format("{0:C}", reporte.ValorPromedio)</td>
+            </tr>
+        }
+    </tbody>
+</table>

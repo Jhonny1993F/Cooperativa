@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Cooperativa.styles.css" asp-append-version="true" />
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4241351595121131"
+            crossorigin="anonymous">
+    </script>
+
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">COMA</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/imagenes/coma.png" alt="Index" style="width: 50px; height: 50px;">
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -23,61 +30,94 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Socios" asp-action="Create">Registro</a>
                         </li> *@
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Socios" asp-action="Index">Socios</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Socios" asp-action="Index">
+                                <img src="/imagenes/socios.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">Clientes</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Clientes" asp-action="Index">
+                                <img src="/imagenes/clientes.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Pasivos" asp-action="Index">Pasivos</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Pasivos" asp-action="Index">
+                                <img src="/imagenes/pasivos.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Eventos" asp-action="Index">Eventos</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Eventos" asp-action="Index">
+                                <img src="/imagenes/eventos.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Ahorros" asp-action="Index">Ahorros</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Ahorros" asp-action="Index">
+                                <img src="/imagenes/ahorros.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="PasivosClientes" asp-action="Index">Pasivos clientes</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="PasivosClientes" asp-action="Index">
+                                <img src="/imagenes/pasivos.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Creditos" asp-action="Index">Creditos</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Creditos" asp-action="Index">
+                                <img src="/imagenes/creditos.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Depositos" asp-action="Index">Depositos</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Depositos" asp-action="Index">
+                                <img src="/imagenes/deposito.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Retiros" asp-action="Index">Retiros</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Retiros" asp-action="Index">
+                                <img src="/imagenes/retiro.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Transferencias" asp-action="Index">Transferencias</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Transferencias" asp-action="Index">
+                                <img src="/imagenes/transferencias.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Utilidades" asp-action="Index">Utilidades</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Utilidades" asp-action="Index">
+                                <img src="/imagenes/utilidades.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
+                        </li>
+                        @* <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Bancos" asp-action="Index">
+                                <img src="/imagenes/bancos.png" alt="Ingreso" style="width: 40px; height: 40px;">
+                            </a>
+                        </li> *@
+                        @* <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Seguros" asp-action="Index">Seguros</a>
                         </li>
                         <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Bancos" asp-action="Index">Bancos</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Seguros" asp-action="Reporte">Reporte</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Utilidades" asp-action="SociosConMayorUtilidad">TopSocios</a>
+                        </li> *@
 @*                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Logins" asp-action="Login">Ingreso</a>
                         </li> *@
+                        
                     </ul>
+                    <!-- Logout alineado a la derecha -->
+                    @if (User?.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <div class="ms-auto">
+                            <form asp-action="Logout" asp-controller="Logins" method="post" style="display:inline;">
+                                <button type="submit" style="background-color:white; border:hidden">
+                                    <img src="/imagenes/salir.png" alt="Cerrar Sesión" style="width: 40px; height: 40px;" />
+                                </button>
+                                @Html.AntiForgeryToken()
+                            </form>
+                        </div>
+                    }
                 </div>
             </div>
-            @if (User?.Identity != null && User.Identity.IsAuthenticated)
-            {
-                <div>
-                    <form asp-action="Logout" asp-controller="Logins" method="post" style="display:inline;">
-                        @* <button type="submit" class="btn btn-link">Cerrar Sesión</button> *@
-                        <input type="submit" value="Cerrar sesion" class="btn btn-primary" />
-                        @Html.AntiForgeryToken()
-                    </form>
-                </div>
-            }
-            else
-            {
-                @* <li><a asp-controller="Logins" asp-action="Login">Iniciar Sesión</a></li> *@
-            }
+            
         </nav>
     </header>
     <div class="container">
@@ -88,7 +128,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - Cooperativa - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; Desarrollado por MAJACOM  - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -1,38 +1,63 @@
 ﻿@model IEnumerable<Cooperativa.Models.Bancos>
+@using System.Security.Claims
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var tipoUsuario = User?.FindFirst("TipoUsuario")?.Value; // Recuperar tipo de usuario
+
+    bool isAdmin = userId == "2"; // El ID 2 es el administrador
+    bool isSocio = tipoUsuario == "Socio"; // Si está en la tabla SOCIOS
+    bool isCliente = tipoUsuario == "Cliente"; // Si está en la tabla CLIENTES
+
+    if (isAdmin)
+    {
+        Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    }
+    else if (isSocio)
+    {
+        Layout = "~/Views/Shared/GeneralLayout.cshtml";
+    }
+    else if (isCliente)
+    {
+        Layout = "~/Views/Shared/UsuarioLayout.cshtml";
+    }
 }
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Bancos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo</a>
 </p>
+<div style="overflow-x: auto; width: 100%;">
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.nombre)
+                @* @Html.DisplayNameFor(model => model.nombre) *@
+                <label> Nombre del banco:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.interesBanco)
+                @* @Html.DisplayNameFor(model => model.interesBanco) *@
+                <label> Interes del banco:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cantidad)
+                @* @Html.DisplayNameFor(model => model.cantidad) *@
+                <label> Cantidad:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.comparacion)
+                @* @Html.DisplayNameFor(model => model.comparacion) *@
+                <label> Comparacion:</label>
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.creditos)
-            </th>
+            </th> *@
             <th>
-                @Html.DisplayNameFor(model => model.interes)
+                @* @Html.DisplayNameFor(model => model.interes) *@
+                <label> Interes local:</label>
             </th>
             <th></th>
         </tr>
@@ -52,18 +77,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.comparacion)
             </td>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.creditos.creditoID)
-            </td>
+            </td> *@
             <td>
                 @Html.DisplayFor(modelItem => item.interes)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.BancoID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BancoID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BancoID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.BancoID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.BancoID">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.BancoID">Eliminar</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

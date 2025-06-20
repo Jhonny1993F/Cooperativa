@@ -8,7 +8,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
 <h4>Retiros</h4>
 <hr />
@@ -17,35 +17,40 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="cantidadRetiro" class="control-label"></label>
-                <input asp-for="cantidadRetiro" class="form-control" />
+                @* <label asp-for="cantidadRetiro" class="control-label"></label> *@
+                <label>Ingrese la cantidad de retiro:</label>
+                <input asp-for="cantidadRetiro" class="form-control" placeholder="Ejemplo: 50.50"/>
                 <span asp-validation-for="cantidadRetiro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label>Fecha de Retiro</label>
+                <label>Fecha de Retiro:</label>
                 <input type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" readonly />
                 @Html.HiddenFor(m => m.fechaRetiro, new { Value = DateTime.Now }) <!-- Campo oculto para la fecha -->
             </div>
             <div class="form-group">
-                <label asp-for="detalleRetiro" class="control-label"></label>
-                <input asp-for="detalleRetiro" class="form-control" />
+                @* <label asp-for="detalleRetiro" class="control-label"></label> *@
+                <label>Detalle del retiro:</label>
+                <input asp-for="detalleRetiro" class="form-control" placeholder="Ejemplo: Traslado de dinero"/>
                 <span asp-validation-for="detalleRetiro" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="cliente" class="control-label"></label>
+                @* <label asp-for="cliente" class="control-label"></label> *@
+                <label>Seleccione al cliente:</label>
                 @* <input asp-for="cliente" class="form-control" /> *@
-                <select asp-for="cliente" class="form-control" asp-items="ViewBag.cliente"></select>
+                <select asp-for="cliente" class="form-control" asp-items="ViewBag.cliente">
+                    <option value="" disabled>--- "Seleccione el cliente: ---"</option>
+                </select>
                 <span asp-validation-for="cliente" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar al menu principal</a>
 </div>
 
 @section Scripts {

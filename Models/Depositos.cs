@@ -7,7 +7,7 @@ namespace Cooperativa.Models
     {
         [Key]
         public int depositoID { get; set; }
-        public double cantidadDeposito { get; set; }
+        public decimal cantidadDeposito { get; set; }
         public DateTime fechaDeposito { get; set; }
         public string? detalleDeposito { get; set;}
 

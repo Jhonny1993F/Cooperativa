@@ -8,33 +8,37 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Eliminar</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>¿Deseas eliminar este retiro?</h3>
 <div>
     <h4>Retiros</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cantidadRetiro)
+            @* @Html.DisplayNameFor(model => model.cantidadRetiro) *@
+            <label>Cantidad de retiro:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.cantidadRetiro)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaRetiro)
+            @* @Html.DisplayNameFor(model => model.fechaRetiro) *@
+            <label>Fecha de retiro:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.fechaRetiro)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.detalleRetiro)
+            @* @Html.DisplayNameFor(model => model.detalleRetiro) *@
+            <label>Detalle del retiro:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.detalleRetiro)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cliente)
+            @* @Html.DisplayNameFor(model => model.cliente) *@
+            <label>Cliente:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.cliente)
@@ -43,7 +47,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="retiroID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index">Regresar al menu principal</a>
     </form>
 </div>

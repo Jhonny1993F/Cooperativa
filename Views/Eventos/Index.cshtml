@@ -1,38 +1,68 @@
 ﻿@model IEnumerable<Cooperativa.Models.Eventos>
+@using System.Security.Claims
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    // Recuperar el socioID desde los claims
+    var socioId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+    // Decidir el layout basado en el socioID
+    Layout = socioId == "2"
+        ? "~/Views/Shared/AdministradorLayout.cshtml"
+        : "~/Views/Shared/GeneralLayout.cshtml";
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Eventos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo</a>
 </p>
+<div style="overflow-x: auto; width: 100%;">
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.fechaEvento)
+                @* @Html.DisplayNameFor(model => model.fechaEvento) *@
+                <label>Fecha del evento:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.tipoEvento)
+                @* @Html.DisplayNameFor(model => model.tipoEvento) *@
+                <label>Tipo de evento:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.costoEvento)
+                @* @Html.DisplayNameFor(model => model.costoEvento) *@
+                <label>Costo del evento:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.detalleEvento)
+                @* @Html.DisplayNameFor(model => model.detalleEvento) *@
+                <label>Detalle del evento:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.lugar)
+                @* @Html.DisplayNameFor(model => model.lugar) *@
+                <label>Lugar:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.socio)
+                @* @Html.DisplayNameFor(model => model.socio) *@
+                <label>Socio:</label>
             </th>
             <th></th>
         </tr>
@@ -59,11 +89,12 @@
                 @Html.DisplayFor(modelItem => item.socio)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.eventoID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.eventoID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.eventoID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.eventoID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.eventoID">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.eventoID">Eliminar</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

@@ -8,33 +8,37 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Eliminar</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>¿Deseas eliminar esta transferencia?</h3>
 <div>
     <h4>Transferencias</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cantidadTransferencia)
+            @* @Html.DisplayNameFor(model => model.cantidadTransferencia) *@
+            <label>Cantidad de la transferencia:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.cantidadTransferencia)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaTransferencia)
+            @* @Html.DisplayNameFor(model => model.fechaTransferencia) *@
+            <label>Fecha de la transferencia:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.fechaTransferencia)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.detalleTransferencia)
+            @* @Html.DisplayNameFor(model => model.detalleTransferencia) *@
+            <label>Detalle de la transferencia:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.detalleTransferencia)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cliente)
+            @* @Html.DisplayNameFor(model => model.cliente) *@
+            <label>Cliente:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.cliente)
@@ -44,6 +48,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="transferenciaID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Regresar al menu principal</a>
     </form>
 </div>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Cooperativa.Data;
 using Cooperativa.Models;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Cooperativa.Controllers
 {
@@ -50,6 +51,7 @@ namespace Cooperativa.Controllers
         public IActionResult Create()
         {
             ViewData["interes"] = new SelectList(_context.Creditos, "interes", "interes");
+            ViewData["cantidad"] = new SelectList(_context.Creditos, "montoCredito", "montoCredito");
             return View();
         }
 
@@ -64,15 +66,17 @@ namespace Cooperativa.Controllers
             {
                 if (bancos.interes > 0)
                 {
-                    var interesSeleccionado = await _context.Creditos.FirstOrDefaultAsync(b => b.interes == bancos.interes);
+                    var interesSeleccionado = await _context.Creditos.FirstOrDefaultAsync(c => c.interes == bancos.interes);
                     if (interesSeleccionado != null)
                     {
                         bancos.creditoID = interesSeleccionado.creditoID;
+                        bancos.comparacion = (bancos.interesBanco * bancos.cantidad / 100) - bancos.interes;
                     }
                     else
                     {
                         ModelState.AddModelError("banco", "El banco seleccionado no existe.");
                         ViewData["interes"] = new SelectList(await _context.Creditos.ToListAsync(), "interes", "interes");
+                        ViewData["cantidad"] = new SelectList(await _context.Creditos.ToListAsync(), "montoCredito", "montoCredito");
                         return View(bancos);
                     }
                 }
@@ -98,55 +102,36 @@ namespace Cooperativa.Controllers
             {
                 return NotFound();
             }
-            ViewData["interes"] = new SelectList(_context.Creditos, "interes", "interes", bancos.interes);
+            ViewData["interes"] = new SelectList(_context.Creditos, "interes", "interes");
+            ViewData["cantidad"] = new SelectList(_context.Creditos, "montoCredito", "montoCredito");
             return View(bancos);
         }
 
-        // POST: Bancos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BancoID,nombre,interesBanco,cantidad,comparacion,creditoID,interes")] Bancos bancos)
+        public async Task<IActionResult> Edit([Bind("BancoID,nombre,interesBanco,cantidad,comparacion,interes")] Bancos bancos)
         {
-            if (id != bancos.BancoID)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
+                if (bancos.interes > 0)
                 {
-                    if (/*!string.IsNullOrEmpty(bancos.interes)*/ bancos.interes > 0)
+                    var interesSeleccionado = await _context.Creditos.FirstOrDefaultAsync(c => c.interes == bancos.interes);
+                    if (interesSeleccionado != null)
                     {
-                        var bancoSeleccionado = await _context.Creditos.FirstOrDefaultAsync(b => b.interes == bancos.interes);
-                        if (bancoSeleccionado != null)
-                        {
-                            bancos.creditoID = bancoSeleccionado.creditoID;
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("banco", "El banco seleccionado no existe.");
-                            ViewData["interes"] = new SelectList(await _context.Creditos.ToListAsync(), "interes", "interes");
-                            return View(bancos);
-                        }
-                    }
-
-                    _context.Update(bancos);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BancosExists(bancos.BancoID))
-                    {
-                        return NotFound();
+                        bancos.creditoID = interesSeleccionado.creditoID;
+                        bancos.comparacion = (bancos.interesBanco * bancos.cantidad / 100) - bancos.interes;
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError("banco", "El banco seleccionado no existe.");
+                        ViewData["interes"] = new SelectList(await _context.Creditos.ToListAsync(), "interes", "interes");
+                        ViewData["cantidad"] = new SelectList(await _context.Creditos.ToListAsync(), "montoCredito", "montoCredito");
+                        return View(bancos);
                     }
                 }
+
+                _context.Update(bancos);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["interes"] = new SelectList(_context.Creditos, "interes", "interes", bancos.interes);

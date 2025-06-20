@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cooperativa.Data;
 using Cooperativa.Models;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace Cooperativa.Controllers
 {
@@ -19,30 +21,50 @@ namespace Cooperativa.Controllers
             _context = context;
         }
 
-        // GET: PasivosClientes
+        // GET: Pasivos Clientes
         public async Task<IActionResult> Index()
         {
-            var CooperativaContext = _context.PasivosClientes.Include(p => p.clientes).Include(p => p.clientes);
-            return View(await _context.PasivosClientes.ToListAsync());
-        }
+            // Obtener el ID y el tipo de usuario (Socio o Cliente) desde los claims
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userRoleClaim = User.FindFirst("TipoUsuario")?.Value; // Obtienes el "TipoUsuario" (Socio o Cliente)
 
-        // GET: PasivosClientes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            if (!int.TryParse(userIdClaim, out int userId))
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Usuario no válido";
+                return RedirectToAction("Index");
+            }
+            // Si es socio administrador (ID = 2)
+            if (userRoleClaim == "Socio" && userId == 2)
+            {
+                // El administrador ve todos los ahorros
+                var pasivosC = await _context.PasivosClientes.ToListAsync();
+                return View(pasivosC);
             }
 
-            var pasivosClientes = await _context.PasivosClientes
-                .Include(p => p.clientes)
-                .FirstOrDefaultAsync(m => m.pasivoClienteID == id);
-            if (pasivosClientes == null)
+            /*// Si es un socio normal
+            if (userRoleClaim == "Socio")
             {
-                return NotFound();
+                // Filtrar los ahorros por socioID
+                var pasivoC = await _context.PasivosClientes
+                    .Where(a => a.socioID == userId)
+                    .ToListAsync();
+                return View(pasivoC);
             }
 
-            return View(pasivosClientes);
+            // Si es un cliente
+            if (userRoleClaim == "Cliente")
+            {
+                // Filtrar los ahorros por clienteID
+                var pasivoC = await _context.PasivosClientes
+                    .Where(a => a.clienteID == userId)
+                    .ToListAsync();
+                return View(pasivoC);
+            }*/
+
+            // Si el usuario no es socio, cerrar la sesión y redirigir al Home
+            await HttpContext.SignOutAsync(); // Esto cierra la sesión
+            TempData["ErrorMessage"] = "No tienes permisos para esta acción";
+            return RedirectToAction("Index", "Home"); // Redirigir al Home
         }
 
         // GET: PasivosClientes/Create

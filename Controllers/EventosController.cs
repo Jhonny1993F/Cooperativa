@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cooperativa.Data;
 using Cooperativa.Models;
+using System.Security.Claims;
+using NuGet.Protocol;
+using Microsoft.AspNetCore.Authentication;
 
 namespace Cooperativa.Controllers
 {
@@ -22,8 +25,47 @@ namespace Cooperativa.Controllers
         // GET: Eventos
         public async Task<IActionResult> Index()
         {
-            var CooperativaContext = _context.Eventos.Include(a => a.socios).Include(a => a.socios);
-            return View(await _context.Eventos.ToListAsync());
+            // Obtener el ID y el tipo de usuario (Socio o Cliente) desde los claims
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userRoleClaim = User.FindFirst("TipoUsuario")?.Value; // Obtienes el "TipoUsuario" (Socio o Cliente)
+
+            if (!int.TryParse(userIdClaim, out int userId))
+            {
+                TempData["ErrorMessage"] = "Usuario no válido";
+                return RedirectToAction("Index");
+            }
+            // Si es socio administrador (ID = 2)
+            if (userRoleClaim == "Socio" && userId == 2)
+            {
+                // El administrador ve todos los ahorros
+                var eventos = await _context.Eventos.ToListAsync();
+                return View(eventos);
+            }
+
+            // Si es un socio normal
+            if (userRoleClaim == "Socio")
+            {
+                // Filtrar los ahorros por socioID
+                var evento = await _context.Eventos
+                    .Where(a => a.socioID == userId)
+                    .ToListAsync();
+                return View(evento);
+            }
+
+            /*// Si es un cliente
+            if (userRoleClaim == "Cliente")
+            {
+                // Filtrar los ahorros por clienteID
+                var evento = await _context.Eventos
+                    .Where(a => a.clienteID == userId)
+                    .ToListAsync();
+                return View(evento);
+            }*/
+
+            // Si el usuario no es socio, cerrar la sesión y redirigir al Home
+            await HttpContext.SignOutAsync(); // Esto cierra la sesión
+            TempData["ErrorMessage"] = "No tienes permisos para esta acción";
+            return RedirectToAction("Index", "Home"); // Redirigir al Home
         }
 
         // GET: Eventos/Details/5
@@ -31,24 +73,57 @@ namespace Cooperativa.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Evento no encontrado";
+                return RedirectToAction("Index");
+            }
+
+            var socioIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+            if(!int.TryParse(socioIdClaim, out int socioId))
+            {
+                TempData["ErrorMessage"] = "El socio no existe";
+                return RedirectToAction("Index");
             }
 
             var eventos = await _context.Eventos
-                .Include(a => a.socios)
-                .FirstOrDefaultAsync(m => m.eventoID == id);
+                .FirstOrDefaultAsync(e => e.eventoID == id);
+
             if (eventos == null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "El evento no existe";
+                return RedirectToAction("Index");
+            }
+
+            if (eventos.socioID != socioId)
+            {
+                TempData["ErrorMessage"] = "No tienes permiso para esta accion";
+                return RedirectToAction("Index");
             }
 
             return View(eventos);
         }
 
         // GET: Eventos/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["socio"] = new SelectList(_context.Set<Socios>(), "socio", "socio");
+            var socioIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!int.TryParse(socioIdClaim, out int socioId))
+            {
+                TempData["ErrorMessage"] = "El socio no existe";
+                return RedirectToAction("Index");
+            }
+
+            var socioLogueado = await _context.Socios
+                .Where(s => s.socioID == socioId)
+                .ToListAsync();
+            
+            if (!socioLogueado.Any())
+            {
+                TempData["ErrorMessage"] = "El socio no existe";
+                return View();
+            }
+
+            ViewData["socio"] = new SelectList(socioLogueado, "socio", "socio");
             return View();
         }
 
@@ -75,16 +150,18 @@ namespace Cooperativa.Controllers
                     else
                     {
                         ModelState.AddModelError("socio", "El socio seleccionado no existe.");
-                        ViewData["socio"] = new SelectList(await _context.Socios.ToListAsync(), "socioID", "socio");
+                        //ViewData["socio"] = new SelectList(await _context.Socios.ToListAsync(), "socioID", "socio");
                         return View(eventos);
                     }
                 }
 
                 _context.Add(eventos);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                TempData["SuccessMessage"] = "Evento creado exitosamente";
+                return RedirectToAction("Index");
+                //return RedirectToAction(nameof(Index));
             }
-            ViewData["socio"] = new SelectList(await _context.Socios.ToListAsync(), "socioID", "socio");
+            //ViewBag["socio"] = new SelectList(await _context.Socios.ToListAsync(), "socioID", "socio");
             return View(eventos);
         }
 
@@ -93,15 +170,44 @@ namespace Cooperativa.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Evento no encontrado";
+                return RedirectToAction("Index");
             }
 
-            var eventos = await _context.Eventos.FindAsync(id);
+            var socioIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (!int.TryParse(socioIdClaim, out int socioId))
+            {
+                TempData["ErrorMessage"] = "El socio no existe";
+                return RedirectToAction("Index");
+            }
+
+            var eventos = await _context.Eventos
+                .FirstOrDefaultAsync(e => e.eventoID == id);
+
             if (eventos == null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "El evento no existe";
+                return RedirectToAction("Index");
             }
-            ViewData["socio"] = new SelectList(_context.Set<Socios>(), "socio", "socio", eventos.socio);
+
+            if (eventos.socioID != socioId)
+            {
+                TempData["ErrorMessage"] = "No tienes permiso para esta accion";
+                return RedirectToAction("Index");
+            }
+
+            var socioLogueado = await _context.Socios
+                .Where(s => s.socioID == socioId)
+                .ToListAsync();
+
+            if (!socioLogueado.Any())
+            {
+                TempData["ErrorMessage"] = "Socio no permitido";
+                return RedirectToAction("Index");
+            }
+
+            ViewData["socio"] = new SelectList(socioLogueado, "socio", "socio");
             return View(eventos);
         }
 
@@ -139,6 +245,7 @@ namespace Cooperativa.Controllers
 
                     _context.Update(eventos);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Evento actualizado exitosamente";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -151,7 +258,7 @@ namespace Cooperativa.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             return View(eventos);
         }
@@ -161,16 +268,32 @@ namespace Cooperativa.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "Evento no encontrado";
+                return RedirectToAction("Index");
+            }
+
+            var socioIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (!int.TryParse(socioIdClaim, out int socioId))
+            {
+                TempData["ErrorMessage"] = "El socio no existe";
+                return RedirectToAction("Index");
             }
 
             var eventos = await _context.Eventos
-                .FirstOrDefaultAsync(m => m.eventoID == id);
+                .FirstOrDefaultAsync(e => e.eventoID == id);
+
             if (eventos == null)
             {
-                return NotFound();
+                TempData["ErrorMessage"] = "El evento no existe";
+                return RedirectToAction("Index");
             }
 
+            if (eventos.socioID != socioId)
+            {
+                TempData["ErrorMessage"] = "No tienes permiso para esta accion";
+                return RedirectToAction("Index");
+            }
             return View(eventos);
         }
 
@@ -186,6 +309,7 @@ namespace Cooperativa.Controllers
             }
 
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Evento eliminado exitosamente";
             return RedirectToAction(nameof(Index));
         }
 

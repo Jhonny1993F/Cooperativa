@@ -1,35 +1,51 @@
 ﻿@model IEnumerable<Cooperativa.Models.PasivosClientes>
+@using System.Security.Claims
+
+@* @{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+} *@
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    // Recuperar el socioID desde los claims
+    var socioId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+    // Decidir el layout basado en el socioID
+    Layout = socioId == "2"
+        ? "~/Views/Shared/AdministradorLayout.cshtml"
+        : "~/Views/Shared/GeneralLayout.cshtml";
 }
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Pasivos de clientes</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.tipo)
+                @* @Html.DisplayNameFor(model => model.tipo) *@
+                <label>Tipo:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.costoPasivo)
+                @* @Html.DisplayNameFor(model => model.costoPasivo) *@
+                <label>Costo del pasivo:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.detallePasivo)
+                @* @Html.DisplayNameFor(model => model.detallePasivo) *@
+                <label>Detalle:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fechaPasivo)
+                @* @Html.DisplayNameFor(model => model.fechaPasivo) *@
+                <label>Fecha:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cliente)
+                @* @Html.DisplayNameFor(model => model.cliente) *@
+                <label>Cliente:</label>
             </th>
             <th></th>
         </tr>
@@ -53,9 +69,9 @@
                 @Html.DisplayFor(modelItem => item.cliente)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.pasivoClienteID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.pasivoClienteID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.pasivoClienteID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.pasivoClienteID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.pasivoClienteID">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.pasivoClienteID">Eliminar</a>
             </td>
         </tr>
 }

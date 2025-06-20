@@ -1,45 +1,105 @@
 ﻿@model IEnumerable<Cooperativa.Models.Creditos>
+@using System.Security.Claims
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var admin = User?.FindFirst("Admin")?.Value; // Recuoera al admin
+    var tipoUsuario = User?.FindFirst("TipoUsuario")?.Value; // Recuperar tipo de usuario
+
+    bool isAdmin = admin == "Administrador"; // El ID 2 es el administrador
+    bool isSocio = tipoUsuario == "Socio"; // Si está en la tabla SOCIOS
+    bool isCliente = tipoUsuario == "Cliente"; // Si está en la tabla CLIENTES
+
+    if (isAdmin)
+    {
+        Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    }
+    else if (isSocio)
+    {
+        Layout = "~/Views/Shared/GeneralLayout.cshtml";
+    }
+    else if (isCliente)
+    {
+        Layout = "~/Views/Shared/UsuarioLayout.cshtml";
+    }
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Creditos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo</a>
 </p>
+<div style="overflow-x: auto; width: 100%;">
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.montoCredito)
+                <label> Monto del crédito:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fechaCredito)
+                <label>Fecha de crédito:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.tiempo)
+                <label> Tipo de crédito:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.interes)
+                <label> Tiempo de finaciamiento:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cuota)
+                <label> Interes:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.estado)
+                <label> Interes mensual:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.totalCredito)
+                <label> Valor de la cuota:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.socio)
+                <label> Estado del crédito:</label>
             </th>
+            <th>
+                <label> Monto total del crédito:</label>
+            </th>
+                @if (isAdmin)
+                {
+                    <th>
+                        <label> Socio:</label>
+                    </th>
+                    <th>
+                        <label> Cliente:</label>
+                    </th>
+                }
+                else if (isSocio)
+                {
+                    <th>
+                        <label> Socio:</label>
+                    </th>
+                }else if (isCliente)
+                {
+                    <th>
+                        <label> Cliente:</label>
+                    </th>
+                }
             <th></th>
         </tr>
     </thead>
@@ -53,10 +113,30 @@
                 @Html.DisplayFor(modelItem => item.fechaCredito)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.tipoCredito)
+            </td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.tiempo)
+            </td> *@
+            @* <td>
+                @(item.tiempo + " meses / " + item.tiempo)
+            </td> *@
+            <td>
+                @($"{item.tiempo} meses / {item.tiempo}")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.interes)
+            </td>
+             <td>
+                @(item.tiempo <=3 && item.tipoCredito == "NORMAL" ? "2.5%" :
+                 item.tiempo <= 6 && item.tipoCredito == "NORMAL" ? "1.5%" :
+                 item.tiempo <= 9 && item.tipoCredito == "NORMAL" ? "1.27%" :
+                 item.tiempo <= 12 && item.tipoCredito == "NORMAL" ? "1.1%" :
+                 item.tiempo > 12 && item.tiempo <= 60 && item.montoCredito >= 3000 && item.tipoCredito == "DIRECTO" ? "0.5%" :
+                 item.tiempo > 12 && item.tiempo <= 84 && item.montoCredito >= 3000 && item.tipoCredito == "CONSUMO" ? "0.6%" :
+                 item.tiempo > 36 && item.tiempo <= 240 && item.montoCredito >= 3000 && item.tipoCredito == "VIVIENDA HIPOTECARIA" ? "0.55%" :
+                 item.tiempo > 36 && item.tiempo <= 300 && item.montoCredito >= 3000 && item.tipoCredito == "VIVIENDA DE INTERES PUBLICO" ? "0.25%" :
+                 "N/A")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.cuota)
@@ -67,15 +147,48 @@
             <td>
                 @Html.DisplayFor(modelItem => item.totalCredito)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.socio)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.creditoID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.creditoID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.creditoID">Delete</a>
-            </td>
+                    @if (isAdmin)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.socio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cliente)
+                        </td>
+                    }
+                    else if (isSocio)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.socio)
+                        </td>
+                    }
+                    else if (isCliente)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cliente)
+                        </td>
+                    }
+                    @if (isAdmin)
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.creditoID">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.creditoID">Detalles</a> |
+                            <a asp-action="Delete" asp-route-id="@item.creditoID">Eliminar</a>
+                        </td>
+                    }else if (isSocio)
+                    {
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.creditoID">Detalles</a>
+                        </td>
+                    }else if (isCliente)
+                    {
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.creditoID">Detalles</a>
+                        </td>
+                    }
         </tr>
 }
     </tbody>
 </table>
+</div>
+

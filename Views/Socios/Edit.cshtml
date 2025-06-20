@@ -1,14 +1,25 @@
 ﻿@model Cooperativa.Models.Socios
+@using System.Security.Claims
+
+@* @{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+} *@
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    // Recuperar el socioID desde los claims
+    var socioId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+    // Decidir el layout basado en el socioID
+    Layout = socioId == "2"
+        ? "~/Views/Shared/AdministradorLayout.cshtml"
+        : "~/Views/Shared/GeneralLayout.cshtml";
 }
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
 <h4>Socios</h4>
 <hr />
@@ -18,64 +29,74 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="socioID" />
             <div class="form-group">
-                <label asp-for="nombres" class="control-label"></label>
+                @* <label asp-for="nombres" class="control-label"></label> *@
+                <label> Ingrese sus nombres:</label>
                 <input asp-for="nombres" class="form-control" />
                 <span asp-validation-for="nombres" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="apellidos" class="control-label"></label>
+                @* <label asp-for="apellidos" class="control-label"></label> *@
+                <label> Ingrese sus apellidos:</label>
                 <input asp-for="apellidos" class="form-control" />
                 <span asp-validation-for="apellidos" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="cedula" class="control-label"></label>
+                @* <label asp-for="cedula" class="control-label"></label> *@
+                <label> Ingrese su numero de cedula:</label>
                 <input asp-for="cedula" class="form-control" />
                 <span asp-validation-for="cedula" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="fechaNacimiento" class="control-label"></label>
+                @* <label asp-for="fechaNacimiento" class="control-label"></label> *@
+                <label> Ingrese su fecha de nacimiento:</label>
                 <input asp-for="fechaNacimiento" class="form-control" />
                 <span asp-validation-for="fechaNacimiento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="direccion" class="control-label"></label>
+                @* <label asp-for="direccion" class="control-label"></label> *@
+                <label> Ingrese su direccion:</label>
                 <input asp-for="direccion" class="form-control" />
                 <span asp-validation-for="direccion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="telefono" class="control-label"></label>
+                @* <label asp-for="telefono" class="control-label"></label> *@
+                <label> Ingrese su numero de telefono:</label>
                 <input asp-for="telefono" class="form-control" />
                 <span asp-validation-for="telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="socio" class="control-label"></label>
+                @* <label asp-for="socio" class="control-label"></label> *@
+                <label> Ingrese su primer nombre y primer apellido:</label>
                 <input asp-for="socio" class="form-control" />
                 <span asp-validation-for="socio" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="inscripcion" class="control-label"></label>
+                @* <label asp-for="inscripcion" class="control-label"></label> *@
+                <label> Ingrese el valor de la inscripción:</label>
                 <input asp-for="inscripcion" class="form-control" />
                 <span asp-validation-for="inscripcion" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="correo" class="control-label"></label>
+                @* <label asp-for="correo" class="control-label"></label> *@
+                <label> Ingrese su correo electronico:</label>
                 <input asp-for="correo" class="form-control" />
                 <span asp-validation-for="correo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="contraseña" class="control-label"></label>
+                @* <label asp-for="contraseña" class="control-label"></label> *@
+                <label> Ingrese una contraseña:</label>
                 <input asp-for="contraseña" class="form-control" />
                 <span asp-validation-for="contraseña" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar al menu principal</a>
 </div>
 
 @section Scripts {

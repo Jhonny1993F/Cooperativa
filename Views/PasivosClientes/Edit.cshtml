@@ -8,9 +8,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h4>PasivosClientes</h4>
+<h4>Pasivos de clientes</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -18,40 +18,45 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="pasivoClienteID" />
             <div class="form-group">
-                <label asp-for="tipo" class="control-label"></label>
+                @* <label asp-for="tipo" class="control-label"></label> *@
+                <label>Tipo de pasivo:</label>
                 <input asp-for="tipo" class="form-control" />
                 <span asp-validation-for="tipo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="costoPasivo" class="control-label"></label>
+                @* <label asp-for="costoPasivo" class="control-label"></label> *@
+                <label>Ingrese el costo del pasivo:</label>
                 <input asp-for="costoPasivo" class="form-control" />
                 <span asp-validation-for="costoPasivo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="detallePasivo" class="control-label"></label>
+                @* <label asp-for="detallePasivo" class="control-label"></label> *@
+                <label>Detalle del pasivo:</label>
                 <input asp-for="detallePasivo" class="form-control" />
                 <span asp-validation-for="detallePasivo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="fechaPasivo" class="control-label"></label>
+                @* <label asp-for="fechaPasivo" class="control-label"></label> *@
+                <label>Fecha del pasivo:</label>
                 <input asp-for="fechaPasivo" class="form-control" readonly/>
                 <span asp-validation-for="fechaPasivo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="cliente" class="control-label"></label>
+                @* <label asp-for="cliente" class="control-label"></label> *@
+                <label>Seleccione al cliente:</label>
                 @* <input asp-for="cliente" class="form-control" /> *@
                 <select asp-for="cliente" class="form-control" asp-items="ViewBag.cliente"></select>
                 <span asp-validation-for="cliente" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Guardar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar al menu principal</a>
 </div>
 
 @section Scripts {

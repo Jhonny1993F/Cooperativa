@@ -1,14 +1,33 @@
-﻿@model Cooperativa.Models.Bancos
+﻿@using System.Security.Claims
+@model Cooperativa.Models.Bancos
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var tipoUsuario = User?.FindFirst("TipoUsuario")?.Value; // Recuperar tipo de usuario
+
+    bool isAdmin = userId == "2"; // El ID 2 es el administrador
+    bool isSocio = tipoUsuario == "Socio"; // Si está en la tabla SOCIOS
+    bool isCliente = tipoUsuario == "Cliente"; // Si está en la tabla CLIENTES
+
+    if (isAdmin)
+    {
+        Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    }
+    else if (isSocio)
+    {
+        Layout = "~/Views/Shared/GeneralLayout.cshtml";
+    }
+    else if (isCliente)
+    {
+        Layout = "~/Views/Shared/UsuarioLayout.cshtml";
+    }
 }
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
 <h4>Bancos</h4>
 <hr />
@@ -17,23 +36,30 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="nombre" class="control-label"></label>
-                <input asp-for="nombre" class="form-control" />
+                @* <label asp-for="nombre" class="control-label"></label> *@
+                <label> Ingrese el nombre del banco:</label>
+                <input asp-for="nombre" class="form-control" placeholder="Ejemplo: Banco del pichincha"/>
                 <span asp-validation-for="nombre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="interesBanco" class="control-label"></label>
-                <input asp-for="interesBanco" class="form-control" />
+                @* <label asp-for="interesBanco" class="control-label"></label> *@
+                <label> Interes del banco:</label>
+                <input asp-for="interesBanco" class="form-control" placeholder="Ejemplo: 15"/>
                 <span asp-validation-for="interesBanco" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="cantidad" class="control-label"></label>
-                <input asp-for="cantidad" class="form-control" />
+                @* <label asp-for="cantidad" class="control-label"></label> *@
+                <label> Seleccione la cantidad a simular:</label>
+                @* <input asp-for="cantidad" class="form-control" /> *@
+                <select asp-for="cantidad" class="form-control" asp-items="ViewBag.cantidad">
+                    <option value="" disabled selected>--- Seleccione una cantidad ---</option>
+                </select>
                 <span asp-validation-for="cantidad" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="comparacion" class="control-label"></label>
-                <input asp-for="comparacion" class="form-control" />
+                @* <label asp-for="comparacion" class="control-label"></label> *@
+                <label> Valor a comparar:</label>
+                <input asp-for="comparacion" class="form-control" value="0.00" readonly/>
                 <span asp-validation-for="comparacion" class="text-danger"></span>
             </div>
             @* <div class="form-group">
@@ -41,9 +67,12 @@
                 <select asp-for="creditoID" class ="form-control" asp-items="ViewBag.creditoID"></select>
             </div> *@
             <div class="form-group">
-                <label asp-for="interes" class="control-label"></label>
-                @* <input asp-for="interes" class="form-control" /> *@
-                <select asp-for="interes" class="form-control" asp-items="ViewBag.interes"></select>
+                @* <label asp-for="interes" class="control-label"></label> *@
+                <label> Seleccione un monto con el interes local:</label>
+                @* <input asp-for="interes" class="form-control" value="@ViewBag.interes" readonly/> *@
+                <select asp-for="interes" class="form-control" asp-items="ViewBag.interes">
+                    <option value="" disabled selected>--- Seleccione una cantidad ---</option>
+                </select>
                 <span asp-validation-for="interes" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -54,7 +83,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar al menu principal</a>
 </div>
 
 @section Scripts {

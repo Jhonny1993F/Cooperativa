@@ -1,0 +1,71 @@
+﻿@model Cooperativa.Models.Seguros
+
+@{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+}
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Seguros</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="valor" class="control-label"></label>
+                <input asp-for="valor" class="form-control" />
+                <span asp-validation-for="valor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="fechaSeguro" class="control-label"></label>
+                <input asp-for="fechaSeguro" class="form-control" />
+                <span asp-validation-for="fechaSeguro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label"></label>
+                <input asp-for="Tipo" class="form-control" />
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tiempo" class="control-label"></label>
+                <input asp-for="tiempo" class="form-control" />
+                <span asp-validation-for="tiempo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="descripcion" class="control-label"></label>
+                <input asp-for="descripcion" class="form-control" />
+                <span asp-validation-for="descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="socioID" class="control-label"></label>
+                <select asp-for="socioID" class ="form-control" asp-items="ViewBag.socioID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="socio" class="control-label"></label>
+                <input asp-for="socio" class="form-control" />
+                <span asp-validation-for="socio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="inscripcion" class="control-label"></label>
+                <input asp-for="inscripcion" class="form-control" />
+                <span asp-validation-for="inscripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

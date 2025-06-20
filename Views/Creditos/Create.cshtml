@@ -1,14 +1,34 @@
-﻿@model Cooperativa.Models.Creditos
+﻿@using System.Security.Claims
+@model Cooperativa.Models.Creditos
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var admin = User?.FindFirst("Admin")?.Value; // Recuoera al admin
+    var tipoUsuario = User?.FindFirst("TipoUsuario")?.Value; // Recuperar tipo de usuario
+
+    bool isAdmin = admin == "Administrador"; // El ID 2 es el administrador
+    bool isSocio = tipoUsuario == "Socio"; // Si está en la tabla SOCIOS
+    bool isCliente = tipoUsuario == "Cliente"; // Si está en la tabla CLIENTES
+
+    if (isAdmin)
+    {
+        Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    }
+    else if (isSocio)
+    {
+        Layout = "~/Views/Shared/GeneralLayout.cshtml";
+    }
+    else if (isCliente)
+    {
+        Layout = "~/Views/Shared/UsuarioLayout.cshtml";
+    }
 }
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
 <h4>Creditos</h4>
 <hr />
@@ -17,8 +37,9 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="montoCredito" class="control-label"></label>
-                <input asp-for="montoCredito" class="form-control" />
+                @* <label asp-for="montoCredito" class="control-label"></label> *@
+                <label> Ingrese el monto del credito:</label>
+                <input asp-for="montoCredito" class="form-control" placeholder="Ejemplo: 175"/>
                 <span asp-validation-for="montoCredito" class="text-danger"></span>
             </div>
             @* <div class="form-group">
@@ -27,50 +48,110 @@
                 <span asp-validation-for="fechaCredito" class="text-danger"></span>
             </div> *@
             <div class="form-group">
-                <label>Fecha de Crédito</label>
+                <label>Fecha de Crédito:</label>
                 <input type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" readonly />
                 @Html.HiddenFor(m => m.fechaCredito, new { Value = DateTime.Now }) <!-- Campo oculto para la fecha -->
             </div>
             <div class="form-group">
-                <label asp-for="tiempo" class="control-label"></label>
-                <input asp-for="tiempo" class="form-control" />
+                @* <label asp-for="tiempo" class="control-label"></label> *@
+                <label> Ingrese el tipo credito:</label>
+                @* <input asp-for="tipoCredito" class="form-control" placeholder="Ejemplo: Normal" /> *@
+                <select asp-for="tipoCredito" class="form-control" placeholder="---- Seleccione el tipo de credito ---">
+                    <option value="" disabled selected>--- Seleccione el tipo de credito ---</option>
+                    <option value="NORMAL">NORMAL</option>
+                    <option value="DIRECTO">DIRECTO</option>
+                    <option value="CONSUMO">CONSUMO</option>
+                    <option value="VIVIENDA HIPOTECARIA">VIVIENDA HIPOTECARIA</option>
+                    <option value="VIVIENDA DE INTERES PUBLICO">VIVIENDA DE INTERES PUBLICO</option>
+                </select>
+                <span asp-validation-for="tipoCredito" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @* <label asp-for="tiempo" class="control-label"></label> *@
+                <label> Ingrese el tiempo que desea financiar su credito:</label>
+                <input asp-for="tiempo" class="form-control" placeholder="Ejemplo: 12"/>
                 <span asp-validation-for="tiempo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="interes" class="control-label"></label>
-                <input asp-for="interes" class="form-control" />
+                @* <label asp-for="interes" class="control-label"></label> *@
+                <label> Interes del credito:</label>
+                <input asp-for="interes" class="form-control" value="0.00" readonly />
                 <span asp-validation-for="interes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="cuota" class="control-label"></label>
-                <input asp-for="cuota" class="form-control" />
+                @* <label asp-for="cuota" class="control-label"></label> *@
+                <label> Valor de la cuota:</label>
+                <input asp-for="cuota" class="form-control" value="0.00" readonly />
                 <span asp-validation-for="cuota" class="text-danger"></span>
             </div>
+            @if (isAdmin)
+            {
+                <div class="form-group">
+                    @* <label asp-for="estado" class="control-label"></label> *@
+                    <label> Estado del credito:</label>
+                    @* <input asp-for="estado" class="form-control" /> *@
+                    <select asp-for="estado" class="form-control" placeholder="---- Seleccione el tipo de estado ---">
+                        <option value="" disabled selected>--- Seleccione el tipo de estado ---</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+                        <option value="ACTIVO">ACTIVO</option>
+                        <option value="FINALIZADO">FINALIZADO</option>
+                    </select>
+                    <span asp-validation-for="estado" class="text-danger"></span>
+                </div>
+            }else if(isSocio || isCliente)
+            {
+                <div class="form-group">
+                    @* <label asp-for="estado" class="control-label"></label> *@
+                    <label> Estado del credito:</label>
+                    @* <input asp-for="estado" class="form-control" /> *@
+                    <select asp-for="estado" class="form-control" placeholder="---- Seleccione el tipo de estado ---">
+                        <option value="" disabled selected>--- Seleccione el tipo de estado ---</option>
+                        <option value="PENDIENTE">PENDIENTE</option>
+@*                         <option value="ACTIVO">ACTIVO</option>
+                        <option value="FINALIZADO">FINALIZADO</option> *@
+                    </select>
+                    <span asp-validation-for="estado" class="text-danger"></span>
+                </div>
+            }
+            
             <div class="form-group">
-                <label asp-for="estado" class="control-label"></label>
-                <input asp-for="estado" class="form-control" />
-                <span asp-validation-for="estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="totalCredito" class="control-label"></label>
-                <input asp-for="totalCredito" class="form-control" />
+                @* <label asp-for="totalCredito" class="control-label"></label> *@
+                <label> Valor total del credito:</label>
+                <input asp-for="totalCredito" class="form-control" value="0.00" readonly />
                 <span asp-validation-for="totalCredito" class="text-danger"></span>
             </div>
+            @if (isSocio)
+            {
+                <div class="form-group">
+                    @* <label asp-for="socio" class="control-label"></label> *@
+                    <label> Seleccione al socio:</label>
+                    @* <input asp-for="socio" class="form-control" /> *@
+                    <select asp-for="socio" class="form-control" asp-items="ViewBag.socio">
+                        <option value="" disabled selected>--- Seleccione un socio ---</option>
+                    </select>
+                    <span asp-validation-for="socio" class="text-danger"></span>
+                </div>
+            }else if (isCliente)
+            {
+                <div class="form-group">
+                    @* <label asp-for="socio" class="control-label"></label> *@
+                    <label> Seleccione al cliente:</label>
+                    @* <input asp-for="socio" class="form-control" /> *@
+                    <select asp-for="cliente" class="form-control" asp-items="ViewBag.cliente">
+                        <option value="" disabled selected>--- Seleccione un cliente ---</option>
+                    </select>
+                    <span asp-validation-for="cliente" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
-                <label asp-for="socio" class="control-label"></label>
-                @* <input asp-for="socio" class="form-control" /> *@
-                <select asp-for="socio" class="form-control" asp-items="ViewBag.socio"></select>
-                <span asp-validation-for="socio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar al menu principal</a>
 </div>
 
 @section Scripts {

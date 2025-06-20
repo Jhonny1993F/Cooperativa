@@ -8,7 +8,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
 <h4>Depositos</h4>
 <hr />
@@ -17,13 +17,17 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="cliente" class="control-label"></label>
-                <select asp-for="cliente" class="form-control" asp-items="ViewBag.cliente"></select>
+                @* <label asp-for="cliente" class="control-label"></label> *@
+                <label> Seleccione al cliente:</label>
+                <select asp-for="cliente" class="form-control" asp-items="ViewBag.cliente">
+                    <option value="" disabled selected>--- Seleccione el cliente ---</option>
+                </select>
                 <span asp-validation-for="cliente" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="cantidadDeposito" class="control-label"></label>
-                <input asp-for="cantidadDeposito" class="form-control" />
+                @* <label asp-for="cantidadDeposito" class="control-label"></label> *@
+                <label> Ingrese la cantidad:</label>
+                <input asp-for="cantidadDeposito" class="form-control" placeholder="Ejemplo: 25.75"/>
                 <span asp-validation-for="cantidadDeposito" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -32,19 +36,20 @@
                 @Html.HiddenFor(m => m.fechaDeposito, new { Value = DateTime.Now }) <!-- Campo oculto para la fecha -->
             </div>
             <div class="form-group">
-                <label asp-for="detalleDeposito" class="control-label"></label>
-                <input asp-for="detalleDeposito" class="form-control" />
+                @* <label asp-for="detalleDeposito" class="control-label"></label> *@
+                <label> Detalle del deposito:</label>
+                <input asp-for="detalleDeposito" class="form-control" placeholder="Ejemplo: Deposito a Iker Molina"/>
                 <span asp-validation-for="detalleDeposito" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar al menu principal</a>
 </div>
 
 @section Scripts {

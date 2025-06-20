@@ -1,0 +1,31 @@
+﻿@using System.Security.Claims
+
+@{
+    if (User?.Identity != null && User.Identity.IsAuthenticated)
+    {
+        // Obtiene el ID del usuario desde las claims
+        var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+        if (userIdClaim != null && int.TryParse(userIdClaim, out int userId))
+        {
+            // Verifica si el usuario es el administrador (ID = 2)
+            if (userId == 2)
+            {
+                Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+            }
+            else
+            {
+                Layout = "~/Views/Shared/GeneralLayout.cshtml";
+            }
+        }
+        else
+        {
+            Layout = "~/Views/Shared/GeneralLayout.cshtml"; // Layout por defecto
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/GeneralLayout.cshtml"; // Layout para no autenticados
+    }
+}
+

@@ -1,51 +1,72 @@
-﻿@model Cooperativa.Models.Eventos
+﻿@using System.Security.Claims
+@model Cooperativa.Models.Eventos
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    // Recuperar el socioID desde los claims
+    var socioId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+    // Decidir el layout basado en el socioID
+    Layout = socioId == "2"
+        ? "~/Views/Shared/AdministradorLayout.cshtml"
+        : "~/Views/Shared/GeneralLayout.cshtml";
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalles</h1>
 
 <div>
     <h4>Eventos</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaEvento)
+            @* @Html.DisplayNameFor(model => model.fechaEvento) *@
+            <label>Fecha del evento:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.fechaEvento)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.tipoEvento)
+            @* @Html.DisplayNameFor(model => model.tipoEvento) *@
+            <label>Tipo de evento:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.tipoEvento)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.costoEvento)
+            @* @Html.DisplayNameFor(model => model.costoEvento) *@
+            <label>Costo del evento:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.costoEvento)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.detalleEvento)
+            @* @Html.DisplayNameFor(model => model.detalleEvento) *@
+            <label>Detalle del evento:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.detalleEvento)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.lugar)
+            @* @Html.DisplayNameFor(model => model.lugar) *@
+            <label>Lugar:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.lugar)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.socio)
+            @* @Html.DisplayNameFor(model => model.socio) *@
+            <label>Socio:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.socio)
@@ -53,6 +74,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.eventoID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.eventoID">Editar</a> |
+    <a asp-action="Index">Regresar al menu principal</a>
 </div>

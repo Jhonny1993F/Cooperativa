@@ -8,7 +8,7 @@ namespace Cooperativa.Models
         [Key]
         public int pasivoClienteID { get; set; }
         public String? tipo { get; set; }
-        public double costoPasivo { get; set; }
+        public decimal costoPasivo { get; set; }
         public String? detallePasivo { get; set; }
         public DateTime fechaPasivo { get; set; }
 

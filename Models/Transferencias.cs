@@ -7,7 +7,7 @@ namespace Cooperativa.Models
     {
         [Key]
         public int transferenciaID { get; set; }
-        public double cantidadTransferencia { get; set; }
+        public decimal cantidadTransferencia { get; set; }
         public DateTime fechaTransferencia { get; set; }
         public String? detalleTransferencia { get; set; }
 

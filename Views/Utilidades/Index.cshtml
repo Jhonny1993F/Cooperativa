@@ -1,50 +1,72 @@
 ﻿@model IEnumerable<Cooperativa.Models.Utilidades>
+@using System.Security.Claims
+
+@* @{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+} *@
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    // Recuperar el socioID desde los claims
+    var socioId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+    // Decidir el layout basado en el socioID
+    Layout = socioId == "2"
+        ? "~/Views/Shared/AdministradorLayout.cshtml"
+        : "~/Views/Shared/GeneralLayout.cshtml";
 }
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Utilidades</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo</a>
 </p>
+<div style="overflow-x: auto; width: 100%;">
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.utilidadTotal)
+                @* @Html.DisplayNameFor(model => model.utilidadTotal) *@
+                <label>Utilidad total:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.utilidadPorSocio)
+                @* @Html.DisplayNameFor(model => model.utilidadPorSocio) *@
+                <label>Utilidad por socio:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fechaUtilidad)
+                @* @Html.DisplayNameFor(model => model.fechaUtilidad) *@
+                <label>Fecha de utilidad:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.socio)
+                @* @Html.DisplayNameFor(model => model.socio) *@
+                <label>Socio:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.inscripcion)
+                @* @Html.DisplayNameFor(model => model.inscripcion) *@
+                <label>Inscripcion:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.interes)
+                @* @Html.DisplayNameFor(model => model.interes) *@
+                <label>Interes total:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.totalCredito)
+                @* @Html.DisplayNameFor(model => model.totalCredito) *@
+                <label>Credito total:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.costoEvento)
+                @* @Html.DisplayNameFor(model => model.costoEvento) *@
+                <label>Eventos totales:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.montoAhorro)
+                @* @Html.DisplayNameFor(model => model.montoAhorro) *@
+                <label>Ahorro total:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.costoPasivo)
+                @* @Html.DisplayNameFor(model => model.costoPasivo) *@
+                <label>Pasivo por socio:</label>
             </th>
             <th></th>
         </tr>
@@ -83,11 +105,12 @@
                 @Html.DisplayFor(modelItem => item.costoPasivo)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.utilidadID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.utilidadID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.utilidadID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.utilidadID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.utilidadID">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.utilidadID">Eliminar</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

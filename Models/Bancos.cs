@@ -7,14 +7,18 @@ namespace Cooperativa.Models
     {
         [Key]
         public int BancoID { get; set; }
+        [Required]
         public String? nombre { get; set; }
-        public double interesBanco {  get; set; }
-        public double cantidad { get; set; }
-        public double comparacion { get; set; }
+        [Required]
+        public decimal interesBanco {  get; set; }
+        [Required]
+        public decimal cantidad { get; set; }
+        public decimal comparacion { get; set; }
 
         [ForeignKey("creditoID")]
         public Creditos? creditos { get; set; }
         public int creditoID { get; set; }
-        public double interes { get; set; }
+        [Required]
+        public decimal interes { get; set; }
     }
 }

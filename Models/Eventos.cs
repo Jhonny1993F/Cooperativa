@@ -9,7 +9,7 @@ namespace Cooperativa.Models
         public int eventoID { get; set; }
         public DateTime fechaEvento { get; set; }
         public String? tipoEvento { get; set; }
-        public double costoEvento { get; set; }
+        public decimal costoEvento { get; set; }
         public String? detalleEvento { get; set; }
         public String? lugar { get; set; }
 

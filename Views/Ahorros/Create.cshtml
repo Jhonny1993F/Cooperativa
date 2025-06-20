@@ -1,59 +1,107 @@
-﻿@model Cooperativa.Models.Ahorros
+﻿@using System.Security.Claims
+@model Cooperativa.Models.Ahorros
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var admin = User?.FindFirst("Admin")?.Value; // Recuoera al admin
+    var tipoUsuario = User?.FindFirst("TipoUsuario")?.Value; // Recuperar tipo de usuario
+
+    bool isAdmin = admin == "Administrador"; // El ID 2 es el administrador
+    bool isSocio = tipoUsuario == "Socio"; // Si está en la tabla SOCIOS
+    bool isCliente = tipoUsuario == "Cliente"; // Si está en la tabla CLIENTES
+
+    if (isAdmin)
+    {
+        Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    }
+    else if (isSocio)
+    {
+        Layout = "~/Views/Shared/GeneralLayout.cshtml";
+    }
+    else if (isCliente)
+    {
+        Layout = "~/Views/Shared/UsuarioLayout.cshtml";
+    }
 }
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Crear</h1>
 
 <h4>Ahorros</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
             <div class="form-group">
-                @* <label asp-for="montoAhorro" class="control-label"></label> *@
-                <label> monto ahorro</label>
-                <input asp-for="montoAhorro" class="form-control" />
+                <label> Ingrese el monto del ahorro:</label>
+                <input asp-for="montoAhorro" class="form-control" placeholder="Ejemplo: 250.50" />
                 <span asp-validation-for="montoAhorro" class="text-danger"></span>
             </div>
+
+            @* <div class="form-group">
+                <label> Comprobante:</label>
+                <input asp-for="comprobante" class="form-control" placeholder="Número de referencia" />
+                <span asp-validation-for="comprobante" class="text-danger"></span>
+            </div> *@
+
             <div class="form-group">
-                <label asp-for="comprobante" class="control-label"></label>
-                <input asp-for="comprobante" class="form-control" />
+                <label for="comprobanteArchivo">Comprobante</label>
+                <input type="file" class="form-control" name="comprobanteArchivo" accept=".jpg,.png,.pdf" />
                 <span asp-validation-for="comprobante" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label>Fecha de Ahorro</label>
+                <label>Fecha del Ahorro:</label>
                 <input type="text" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" readonly />
                 @Html.HiddenFor(m => m.fechaAhorro, new { Value = DateTime.Now }) <!-- Campo oculto para la fecha -->
             </div>
+
             <div class="form-group">
-                <label asp-for="detalleAhorro" class="control-label"></label>
-                <input asp-for="detalleAhorro" class="form-control" />
+                <label> Detalle del ahorro:</label>
+                <input asp-for="detalleAhorro" class="form-control" placeholder="Ejemplo: Ahorro mensual" />
                 <span asp-validation-for="detalleAhorro" class="text-danger"></span>
             </div>
+
+            @if (isSocio)
+            {
+                <div class="form-group">
+                    <label>Seleccione el socio:</label>
+                    <select asp-for="socio" class="form-control" asp-items="ViewBag.socio">
+                        <option value="" disabled selected>--- Seleccione un socio ---</option>
+                    </select>
+                    <span asp-validation-for="socio" class="text-danger"></span>
+                </div>
+            }
+            else if (isCliente)
+            {
+                <div class="form-group">
+                    <label>Seleccione el cliente:</label>
+                    <select asp-for="cliente" class="form-control" asp-items="ViewBag.cliente">
+                        <option value="" disabled selected>--- Seleccione un cliente ---</option>
+                    </select>
+                    <span asp-validation-for="cliente" class="text-danger"></span>
+                </div>
+            }
+
             <div class="form-group">
-                <label asp-for="socio" class="control-label"></label>
-                @* <input asp-for="socio" class="form-control" /> *@
-                <select asp-for="socio" class="form-control" asp-items="ViewBag.socio"></select>
-                <span asp-validation-for="socio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Regresar al menú principal</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+

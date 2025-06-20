@@ -1,75 +1,96 @@
 ﻿@model Cooperativa.Models.Socios
+@using System.Security.Claims
+
+@* @{
+    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+} *@
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    // Recuperar el socioID desde los claims
+    var socioId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+    // Decidir el layout basado en el socioID
+    Layout = socioId == "2"
+        ? "~/Views/Shared/AdministradorLayout.cshtml"
+        : "~/Views/Shared/GeneralLayout.cshtml";
 }
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalles</h1>
 
 <div>
     <h4>Socios</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nombres)
+            @* @Html.DisplayNameFor(model => model.nombres) *@
+            <label> Nombres:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.nombres)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.apellidos)
+            @* @Html.DisplayNameFor(model => model.apellidos) *@
+            <label> Apellidos:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.apellidos)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cedula)
+            @* @Html.DisplayNameFor(model => model.cedula) *@
+            <label> Cedula:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.cedula)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaNacimiento)
+            @* @Html.DisplayNameFor(model => model.fechaNacimiento) *@
+            <label> Fecha de nacimiento:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.fechaNacimiento)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.direccion)
+            @* @Html.DisplayNameFor(model => model.direccion) *@
+            <label> Dirección:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.direccion)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.telefono)
+            @* @Html.DisplayNameFor(model => model.telefono) *@
+            <label> Telefono:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.telefono)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.socio)
+            @* @Html.DisplayNameFor(model => model.socio) *@
+            <label> Socio:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.socio)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.inscripcion)
+            @* @Html.DisplayNameFor(model => model.inscripcion) *@
+            <label> Inscripcion:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.inscripcion)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.correo)
+            @* @Html.DisplayNameFor(model => model.correo) *@
+            <label> Correo elctronico:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.correo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.contraseña)
+            @* @Html.DisplayNameFor(model => model.contraseña) *@
+            <label> Contraseña:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.contraseña)
@@ -77,6 +98,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.socioID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.socioID">Editar</a> |
+    <a asp-action="Index">Regresar al menu principal</a>
 </div>

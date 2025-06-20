@@ -27,5 +27,6 @@ namespace Cooperativa.Data
         public DbSet<Cooperativa.Models.Socios> Socios { get; set; } = default!;
         public DbSet<Cooperativa.Models.Transferencias> Transferencias { get; set; } = default!;
         public DbSet<Cooperativa.Models.Utilidades> Utilidades { get; set; } = default!;
+        public DbSet<Cooperativa.Models.Seguros> Seguros { get; set; } = default!;
     }
 }

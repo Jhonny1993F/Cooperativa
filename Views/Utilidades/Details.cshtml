@@ -8,68 +8,78 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalles</h1>
 
 <div>
     <h4>Utilidades</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.utilidadTotal)
+            @* @Html.DisplayNameFor(model => model.utilidadTotal) *@
+            <label>Utilidad total:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.utilidadTotal)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.utilidadPorSocio)
+            @* @Html.DisplayNameFor(model => model.utilidadPorSocio) *@
+            <label>Utilidad por socio:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.utilidadPorSocio)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaUtilidad)
+            @* @Html.DisplayNameFor(model => model.fechaUtilidad) *@
+            <label>Fecha de utilidad:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.fechaUtilidad)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.socio)
+            @* @Html.DisplayNameFor(model => model.socio) *@
+            <label>Socio:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.socio)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.inscripcion)
+            @* @Html.DisplayNameFor(model => model.inscripcion) *@
+            <label>Inscripcion:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.inscripcion)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.interes)
+            @* @Html.DisplayNameFor(model => model.interes) *@
+            <label>Interes total:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.interes)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.totalCredito)
+            @* @Html.DisplayNameFor(model => model.totalCredito) *@
+            <label>Credito total:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.totalCredito)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.costoEvento)
+            @* @Html.DisplayNameFor(model => model.costoEvento) *@
+            <label>Eventos totales:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.costoEvento)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.montoAhorro)
+            @* @Html.DisplayNameFor(model => model.montoAhorro) *@
+            <label>Ahorro total:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.montoAhorro)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.costoPasivo)
+            @* @Html.DisplayNameFor(model => model.costoPasivo) *@
+            <label>Pasivo por socio:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.costoPasivo)
@@ -77,6 +87,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.utilidadID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.utilidadID">Editar</a> |
+    <a asp-action="Index">Regresar al menu principal</a>
 </div>

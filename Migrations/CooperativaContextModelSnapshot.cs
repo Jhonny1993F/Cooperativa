@@ -39,7 +39,7 @@ namespace Cooperativa.Migrations
                     b.Property<DateTime>("fechaAhorro")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("montoAhorro")
+                    b.Property<decimal>("montoAhorro")
                         .HasColumnType("real");
 
                     b.Property<string>("socio")
@@ -69,7 +69,7 @@ namespace Cooperativa.Migrations
             //        b.Property<string>("nombre")
             //            .HasColumnType("nvarchar(max)");
 
-            //        b.Property<double>("interes")
+            //        b.Property<decimal>("interes")
             //            .HasColumnType("real");
 
             //        b.HasKey("BancoID");
@@ -130,7 +130,7 @@ namespace Cooperativa.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("creditoID"));
 
-                    b.Property<double>("cuota")
+                    b.Property<decimal>("cuota")
                         .HasColumnType("real");
 
                     b.Property<string>("estado")
@@ -139,10 +139,10 @@ namespace Cooperativa.Migrations
                     b.Property<DateTime>("fechaCredito")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("interes")
+                    b.Property<decimal>("interes")
                         .HasColumnType("real");
 
-                    b.Property<double>("montoCredito")
+                    b.Property<decimal>("montoCredito")
                         .HasColumnType("real");
 
                     b.Property<string>("socio")
@@ -154,7 +154,7 @@ namespace Cooperativa.Migrations
                     b.Property<int>("tiempo")
                         .HasColumnType("int");
 
-                    b.Property<double>("totalCredito")
+                    b.Property<decimal>("totalCredito")
                         .HasColumnType("real");
 
                     b.HasKey("creditoID");
@@ -172,7 +172,7 @@ namespace Cooperativa.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("depositoID"));
 
-                    b.Property<double>("cantidadDeposito")
+                    b.Property<decimal>("cantidadDeposito")
                         .HasColumnType("real");
 
                     b.Property<string>("cliente")
@@ -202,7 +202,7 @@ namespace Cooperativa.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("eventoID"));
 
-                    b.Property<double>("costoEvento")
+                    b.Property<decimal>("costoEvento")
                         .HasColumnType("real");
 
                     b.Property<string>("detalleEvento")
@@ -267,7 +267,7 @@ namespace Cooperativa.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("pasivoID"));
 
-                    b.Property<double>("costoPasivo")
+                    b.Property<decimal>("costoPasivo")
                         .HasColumnType("real");
 
                     b.Property<string>("detalle")
@@ -298,7 +298,7 @@ namespace Cooperativa.Migrations
                     b.Property<int?>("clientesclienteID")
                         .HasColumnType("int");
 
-                    b.Property<double>("costoPasivo")
+                    b.Property<decimal>("costoPasivo")
                         .HasColumnType("real");
 
                     b.Property<string>("detallePasivo")
@@ -325,7 +325,7 @@ namespace Cooperativa.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("retiroID"));
 
-                    b.Property<double>("cantidadRetiro")
+                    b.Property<decimal>("cantidadRetiro")
                         .HasColumnType("real");
 
                     b.Property<string>("cliente")
@@ -398,7 +398,7 @@ namespace Cooperativa.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("transferenciaID"));
 
-                    b.Property<double>("cantidadTransferencia")
+                    b.Property<decimal>("cantidadTransferencia")
                         .HasColumnType("real");
 
                     b.Property<string>("cliente")
@@ -428,10 +428,10 @@ namespace Cooperativa.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("utilidadID"));
 
-                    b.Property<double>("costoEvento")
+                    b.Property<decimal>("costoEvento")
                         .HasColumnType("real");
 
-                    b.Property<double>("costoPasivo")
+                    b.Property<decimal>("costoPasivo")
                         .HasColumnType("real");
 
                     b.Property<int?>("creditoscreditoID")
@@ -443,10 +443,10 @@ namespace Cooperativa.Migrations
                     b.Property<string>("inscripcion")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("interes")
+                    b.Property<decimal>("interes")
                         .HasColumnType("real");
 
-                    b.Property<double>("montoAhorro")
+                    b.Property<decimal>("montoAhorro")
                         .HasColumnType("real");
 
                     b.Property<string>("socio")
@@ -455,13 +455,13 @@ namespace Cooperativa.Migrations
                     b.Property<int?>("sociossocioID")
                         .HasColumnType("int");
 
-                    b.Property<double>("totalCredito")
+                    b.Property<decimal>("totalCredito")
                         .HasColumnType("real");
 
-                    b.Property<double>("utilidadPorSocio")
+                    b.Property<decimal>("utilidadPorSocio")
                         .HasColumnType("real");
 
-                    b.Property<double>("utilidadTotal")
+                    b.Property<decimal>("utilidadTotal")
                         .HasColumnType("real");
 
                     b.HasKey("utilidadID");

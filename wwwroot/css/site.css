@@ -18,5 +18,93 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+@media (min-width:100px){
+    .Inicio {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 72vh;
+        width: 100%;
+    }
+    .ImgInicio {
+        /*width: 250px;
+        height: 505px;*/
+        width: auto;
+        height:auto;
+    }
+}
+
+@media (min-width:768px) {
+    .Inicio {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 73vh;
+        width: 100%;
+    }
+    .ImgInicio {
+        width: 1100px;
+        height: 445px;
+    }
+}
+
+@media (min-width:1400px) {
+    .Inicio {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 78vh;
+        width: 100%;
+    }
+    .ImgInicio {
+        width: 1300px;
+        height: 580px;
+    }
+}
+
+/* Modal de imagen */
+.modal {
+    display: none; /* Ocultamos el modal por defecto */
+    position: fixed;
+    z-index: 1; /* Aseguramos que el modal esté encima */
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9); /* Fondo oscuro */
+    text-align: center;
+}
+
+.modal-content {
+    max-width: 480px;
+    max-height: 720px;
+    margin: auto;
+}
+
+/* El enlace abre el modal */
+a:focus + .modal {
+    display: block; /* Cuando se hace clic en la imagen, mostramos el modal */
+}
+
+/* Botón de cierre */
+.close {
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    position: absolute;
+    top: 20px;
+    right: 45px;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #999;
+        text-decoration: none;
+        cursor: pointer;
+    }
+

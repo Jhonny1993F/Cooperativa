@@ -40,7 +40,7 @@ namespace Cooperativa.Migrations
                     pasivoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    costoPasivo = table.Column<double>(type: "real", nullable: false),
+                    costoPasivo = table.Column<decimal>(type: "real", nullable: false),
                     detalle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     fechaPasivo = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -77,7 +77,7 @@ namespace Cooperativa.Migrations
                 {
                     depositoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cantidadDeposito = table.Column<double>(type: "real", nullable: false),
+                    cantidadDeposito = table.Column<decimal>(type: "real", nullable: false),
                     fechaDeposito = table.Column<DateTime>(type: "datetime2", nullable: false),
                     detalleDeposito = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     clientesclienteID = table.Column<int>(type: "int", nullable: true),
@@ -100,7 +100,7 @@ namespace Cooperativa.Migrations
                     pasivoID = table.Column<int>(type: "int", nullable: false) // ojo cambio de pasivo a pasivoID
                         .Annotation("SqlServer:Identity", "1, 1"),
                     tipo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    costoPasivo = table.Column<double>(type: "real", nullable: false),
+                    costoPasivo = table.Column<decimal>(type: "real", nullable: false),
                     detallePasivo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     fechaPasivo = table.Column<DateTime>(type: "datetime2", nullable: false),
                     clientesclienteID = table.Column<int>(type: "int", nullable: true),
@@ -122,7 +122,7 @@ namespace Cooperativa.Migrations
                 {
                     retiroID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cantidadRetiro = table.Column<double>(type: "real", nullable: false),
+                    cantidadRetiro = table.Column<decimal>(type: "real", nullable: false),
                     fechaRetiro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     detalleRetiro = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     clientesclienteID = table.Column<int>(type: "int", nullable: true),
@@ -144,7 +144,7 @@ namespace Cooperativa.Migrations
                 {
                     transferenciaID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    cantidadTransferencia = table.Column<double>(type: "real", nullable: false),
+                    cantidadTransferencia = table.Column<decimal>(type: "real", nullable: false),
                     fechaTransferencia = table.Column<DateTime>(type: "datetime2", nullable: false),
                     detalleTransferencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     clientesclienteID = table.Column<int>(type: "int", nullable: true),
@@ -166,7 +166,7 @@ namespace Cooperativa.Migrations
                 {
                     ahorroID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    montoAhorro = table.Column<double>(type: "real", nullable: false),
+                    montoAhorro = table.Column<decimal>(type: "real", nullable: false),
                     comprobante = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     fechaAhorro = table.Column<DateTime>(type: "datetime2", nullable: false),
                     detalleAhorro = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -189,13 +189,13 @@ namespace Cooperativa.Migrations
                 {
                     creditoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    montoCredito = table.Column<double>(type: "real", nullable: false),
+                    montoCredito = table.Column<decimal>(type: "real", nullable: false),
                     fechaCredito = table.Column<DateTime>(type: "datetime2", nullable: false),
                     tiempo = table.Column<int>(type: "int", nullable: false),
-                    interes = table.Column<double>(type: "real", nullable: false),
-                    cuota = table.Column<double>(type: "real", nullable: false),
+                    interes = table.Column<decimal>(type: "real", nullable: false),
+                    cuota = table.Column<decimal>(type: "real", nullable: false),
                     estado = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    totalCredito = table.Column<double>(type: "real", nullable: false),
+                    totalCredito = table.Column<decimal>(type: "real", nullable: false),
                     sociossocioID = table.Column<int>(type: "int", nullable: true),
                     socio = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -217,7 +217,7 @@ namespace Cooperativa.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     fechaEvento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     tipoEvento = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    costoEvento = table.Column<double>(type: "real", nullable: false),
+                    costoEvento = table.Column<decimal>(type: "real", nullable: false),
                     detalleEvento = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     lugar = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     sociossocioID = table.Column<int>(type: "int", nullable: true),
@@ -267,7 +267,7 @@ namespace Cooperativa.Migrations
             //            .Annotation("SqlServer:Identity", "1, 1"),
             //        creditoscreditoID = table.Column<int>(type: "int", nullable: true),
             //        nombre = table.Column<string>(type: "nvarchar(max)", nullable: true),
-            //        interes = table.Column<double>(type: "real", nullable: false)
+            //        interes = table.Column<decimal>(type: "real", nullable: false)
             //    },
             //    constraints: table =>
             //    {
@@ -285,18 +285,18 @@ namespace Cooperativa.Migrations
                 {
                     utilidadID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    utilidadTotal = table.Column<double>(type: "real", nullable: false),
-                    utilidadPorSocio = table.Column<double>(type: "real", nullable: false),
+                    utilidadTotal = table.Column<decimal>(type: "real", nullable: false),
+                    utilidadPorSocio = table.Column<decimal>(type: "real", nullable: false),
                     fechaUtilidad = table.Column<DateTime>(type: "datetime2", nullable: false),
                     sociossocioID = table.Column<int>(type: "int", nullable: true),
                     socio = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     inscripcion = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     creditoscreditoID = table.Column<int>(type: "int", nullable: true),
-                    interes = table.Column<double>(type: "real", nullable: false),
-                    totalCredito = table.Column<double>(type: "real", nullable: false),
-                    costoEvento = table.Column<double>(type: "real", nullable: false),
-                    montoAhorro = table.Column<double>(type: "real", nullable: false),
-                    costoPasivo = table.Column<double>(type: "real", nullable: false)
+                    interes = table.Column<decimal>(type: "real", nullable: false),
+                    totalCredito = table.Column<decimal>(type: "real", nullable: false),
+                    costoEvento = table.Column<decimal>(type: "real", nullable: false),
+                    montoAhorro = table.Column<decimal>(type: "real", nullable: false),
+                    costoPasivo = table.Column<decimal>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,376 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.Rendering;
-//using Microsoft.EntityFrameworkCore;
-//using Cooperativa.Data;
-//using Cooperativa.Models;
-
-//namespace Cooperativa.Controllers
-//{
-//    public class UtilidadesController : Controller
-//    {
-//        private readonly CooperativaContext _context;
-
-//        public UtilidadesController(CooperativaContext context)
-//        {
-//            _context = context;
-//        }
-
-//        // GET: Utilidades
-//        public async Task<IActionResult> Index()
-//        {
-//            var utilidades = await _context.Utilidades
-//                                           .Include(u => u.socios)
-//                                           .Include(u => u.creditos)
-//                                           .ToListAsync();
-//            return View(utilidades);
-//        }
-
-//        // GET: Utilidades/Create
-//        public IActionResult Create()
-//        {
-//            ViewData["socio"] = new SelectList(_context.Socios, "socioID", "socio");
-//            ViewData["inscripcion"] = new SelectList(_context.Socios, "socioID", "inscripcion");
-//            ViewData["interes"] = new SelectList(_context.Creditos, "creditoID", "interes");
-//            ViewData["totalCredito"] = new SelectList(_context.Creditos, "creditoID", "totalCredito");
-//            ViewData["costoEvento"] = new SelectList(_context.Creditos, "creditoID", "costoEvento");
-//            ViewData["montoAhorro"] = new SelectList(_context.Creditos, "creditoID", "montoAhorro");
-//            ViewData["costoPasivo"] = new SelectList(_context.Creditos, "creditoID", "costoPasivo");
-
-//            return View();
-//        }
-
-//        // POST: Utilidades/Create
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> Create([Bind("utilidadID,utilidadTotal,utilidadPorSocio,interes,totalCredito,costoEvento,montoAhorro,costoPasivo,socioID,inscripcion")] Utilidades utilidades)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                // Validación y asignación de relaciones
-//                var socioSeleccionado = await _context.Socios.FirstOrDefaultAsync(s => s.socioID == utilidades.socioID);
-//                var creditoSeleccionado = await _context.Creditos.FirstOrDefaultAsync(c => c.creditoID == utilidades.creditoID);
-
-//                if (socioSeleccionado != null && creditoSeleccionado != null)
-//                {
-//                    utilidades.socioID = socioSeleccionado.socioID;
-//                    utilidades.creditoID = creditoSeleccionado.creditoID;
-//                    utilidades.fechaUtilidad = DateTime.Now;
-
-//                    _context.Add(utilidades);
-//                    await _context.SaveChangesAsync();
-//                    return RedirectToAction(nameof(Index));
-//                }
-//                else
-//                {
-//                    ModelState.AddModelError("Error", "El socio o el crédito seleccionado no existe.");
-//                }
-//            }
-
-//            // Recargar listas en caso de error
-//            ViewData["socio"] = new SelectList(_context.Socios, "socioID", "socio", utilidades.socioID);
-//            ViewData["inscripcion"] = new SelectList(_context.Socios, "socioID", "inscripcion", utilidades.inscripcion);
-//            ViewData["interes"] = new SelectList(_context.Creditos, "creditoID", "interes", utilidades.interes);
-//            ViewData["totalCredito"] = new SelectList(_context.Creditos, "creditoID", "totalCredito", utilidades.totalCredito);
-//            ViewData["costoEvento"] = new SelectList(_context.Creditos, "creditoID", "costoEvento", utilidades.costoEvento);
-//            ViewData["montoAhorro"] = new SelectList(_context.Creditos, "creditoID", "montoAhorro", utilidades.montoAhorro);
-//            ViewData["costoPasivo"] = new SelectList(_context.Creditos, "creditoID", "costoPasivo", utilidades.costoPasivo);
-
-//            return View(utilidades);
-//        }
-
-//        // GET: Utilidades/Edit/5
-//        public async Task<IActionResult> Edit(int? id)
-//        {
-//            if (id == null) return NotFound();
-
-//            var utilidades = await _context.Utilidades.FindAsync(id);
-//            if (utilidades == null) return NotFound();
-
-//            ViewData["socio"] = new SelectList(_context.Socios, "socioID", "socio", utilidades.socioID);
-//            ViewData["inscripcion"] = new SelectList(_context.Socios, "socioID", "inscripcion", utilidades.inscripcion);
-//            ViewData["interes"] = new SelectList(_context.Creditos, "creditoID", "interes", utilidades.interes);
-//            ViewData["totalCredito"] = new SelectList(_context.Creditos, "creditoID", "totalCredito", utilidades.totalCredito);
-//            ViewData["costoEvento"] = new SelectList(_context.Creditos, "creditoID", "costoEvento", utilidades.costoEvento);
-//            ViewData["montoAhorro"] = new SelectList(_context.Creditos, "creditoID", "montoAhorro", utilidades.montoAhorro);
-//            ViewData["costoPasivo"] = new SelectList(_context.Creditos, "creditoID", "costoPasivo", utilidades.costoPasivo);
-
-//            return View(utilidades);
-//        }
-
-//        // POST: Utilidades/Edit/5
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> Edit(int id, [Bind("utilidadID,utilidadTotal,utilidadPorSocio,interes,totalCredito,costoEvento,montoAhorro,costoPasivo,socioID,inscripcion")] Utilidades utilidades)
-//        {
-//            if (id != utilidades.utilidadID) return NotFound();
-
-//            if (ModelState.IsValid)
-//            {
-//                try
-//                {
-//                    var socioSeleccionado = await _context.Socios.FirstOrDefaultAsync(s => s.socioID == utilidades.socioID);
-//                    var creditoSeleccionado = await _context.Creditos.FirstOrDefaultAsync(c => c.creditoID == utilidades.creditoID);
-
-//                    if (socioSeleccionado != null && creditoSeleccionado != null)
-//                    {
-//                        utilidades.socioID = socioSeleccionado.socioID;
-//                        utilidades.creditoID = creditoSeleccionado.creditoID;
-
-//                        _context.Update(utilidades);
-//                        await _context.SaveChangesAsync();
-//                        return RedirectToAction(nameof(Index));
-//                    }
-//                    else
-//                    {
-//                        ModelState.AddModelError("Error", "El socio o el crédito seleccionado no existe.");
-//                    }
-//                }
-//                catch (DbUpdateConcurrencyException)
-//                {
-//                    if (!UtilidadesExists(utilidades.utilidadID)) return NotFound();
-//                    throw;
-//                }
-//            }
-
-//            // Recargar listas en caso de error
-//            ViewData["socio"] = new SelectList(_context.Socios, "socioID", "socio", utilidades.socioID);
-//            ViewData["inscripcion"] = new SelectList(_context.Socios, "socioID", "inscripcion", utilidades.inscripcion);
-//            ViewData["interes"] = new SelectList(_context.Creditos, "creditoID", "interes", utilidades.interes);
-//            ViewData["totalCredito"] = new SelectList(_context.Creditos, "creditoID", "totalCredito", utilidades.totalCredito);
-//            ViewData["costoEvento"] = new SelectList(_context.Creditos, "creditoID", "costoEvento", utilidades.costoEvento);
-//            ViewData["montoAhorro"] = new SelectList(_context.Creditos, "creditoID", "montoAhorro", utilidades.montoAhorro);
-//            ViewData["costoPasivo"] = new SelectList(_context.Creditos, "creditoID", "costoPasivo", utilidades.costoPasivo);
-
-//            return View(utilidades);
-//        }
-
-//        // GET: Utilidades/Delete/5
-//        public async Task<IActionResult> Delete(int? id)
-//        {
-//            if (id == null) return NotFound();
-
-//            var utilidades = await _context.Utilidades
-//                                           .Include(u => u.socios)
-//                                           .Include(u => u.creditos)
-//                                           .FirstOrDefaultAsync(m => m.utilidadID == id);
-//            if (utilidades == null) return NotFound();
-
-//            return View(utilidades);
-//        }
-
-//        // POST: Utilidades/Delete/5
-//        [HttpPost, ActionName("Delete")]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> DeleteConfirmed(int id)
-//        {
-//            var utilidades = await _context.Utilidades.FindAsync(id);
-//            _context.Utilidades.Remove(utilidades);
-//            await _context.SaveChangesAsync();
-//            return RedirectToAction(nameof(Index));
-//        }
-
-//        private bool UtilidadesExists(int id)
-//        {
-//            return _context.Utilidades.Any(e => e.utilidadID == id);
-//        }
-//    }
-//}
-
-
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.Rendering;
-//using Microsoft.EntityFrameworkCore;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Cooperativa.Data;
-//using Cooperativa.Models;
-
-//namespace Cooperativa.Controllers
-//{
-//    public class UtilidadesController : Controller
-//    {
-//        private readonly CooperativaContext _context;
-
-//        public UtilidadesController(CooperativaContext context)
-//        {
-//            _context = context;
-//        }
-
-//        // GET: Utilidades
-//        public async Task<IActionResult> Index()
-//        {
-//            var utilidades = await _context.Utilidades
-//                                           .Include(u => u.socios)
-//                                           .Include(u => u.creditos)
-//                                           .ToListAsync();
-//            return View(utilidades);
-//        }
-
-//        // GET: Utilidades/Create
-//        public IActionResult Create()
-//        {
-//            ViewData["socio"] = new SelectList(_context.Socios, "socioID", "socio");
-//            ViewData["inscripcion"] = new SelectList(_context.Socios, "socioID", "inscripcion");
-//            ViewData["interes"] = new SelectList(_context.Creditos, "creditoID", "interes");
-//            ViewData["totalCredito"] = new SelectList(_context.Creditos, "creditoID", "totalCredito");
-//            ViewData["costoEvento"] = new SelectList(_context.Creditos, "creditoID", "costoEvento");
-//            ViewData["montoAhorro"] = new SelectList(_context.Creditos, "creditoID", "montoAhorro");
-//            ViewData["costoPasivo"] = new SelectList(_context.Creditos, "creditoID", "costoPasivo");
-
-//            return View();
-//        }
-
-//        // POST: Utilidades/Create
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> Create([Bind("utilidadID,utilidadTotal,utilidadPorSocio,interes,totalCredito,costoEvento,montoAhorro,costoPasivo,socioID,inscripcion")] Utilidades utilidades)
-//        {
-//            if (ModelState.IsValid)
-//            {
-//                // Asignar la fecha actual de la utilidad
-//                utilidades.fechaUtilidad = DateTime.Now;
-
-//                // Validación y asignación automática del socioID y creditoID
-//                var socioSeleccionado = await _context.Socios.FirstOrDefaultAsync(s => s.socioID == utilidades.socioID);
-//                var creditoSeleccionado = await _context.Creditos.FirstOrDefaultAsync(c => c.socioID == utilidades.socioID);
-
-//                if (socioSeleccionado != null && creditoSeleccionado != null)
-//                {
-//                    utilidades.socioID = socioSeleccionado.socioID;
-//                    utilidades.creditoID = creditoSeleccionado.creditoID;
-
-//                    _context.Add(utilidades);
-//                    await _context.SaveChangesAsync();
-//                    return RedirectToAction(nameof(Index));
-//                }
-//                else
-//                {
-//                    ModelState.AddModelError("Error", "El socio o el crédito seleccionado no existe.");
-//                }
-//            }
-
-//            // Si hay un error, recargar los valores en los dropdowns
-//            ViewData["socio"] = new SelectList(_context.Socios, "socioID", "socio", utilidades.socioID);
-//            ViewData["inscripcion"] = new SelectList(_context.Socios, "socioID", "inscripcion", utilidades.inscripcion);
-//            ViewData["interes"] = new SelectList(_context.Creditos, "creditoID", "interes", utilidades.interes);
-//            ViewData["totalCredito"] = new SelectList(_context.Creditos, "creditoID", "totalCredito", utilidades.totalCredito);
-//            ViewData["costoEvento"] = new SelectList(_context.Creditos, "creditoID", "costoEvento", utilidades.costoEvento);
-//            ViewData["montoAhorro"] = new SelectList(_context.Creditos, "creditoID", "montoAhorro", utilidades.montoAhorro);
-//            ViewData["costoPasivo"] = new SelectList(_context.Creditos, "creditoID", "costoPasivo", utilidades.costoPasivo);
-
-//            return View(utilidades);
-//        }
-
-//        // GET: Utilidades/Edit/5
-//        public async Task<IActionResult> Edit(int? id)
-//        {
-//            if (id == null)
-//                return NotFound();
-
-//            var utilidades = await _context.Utilidades.FindAsync(id);
-//            if (utilidades == null)
-//                return NotFound();
-
-//            ViewData["socio"] = new SelectList(_context.Socios, "socioID", "socio", utilidades.socioID);
-//            ViewData["inscripcion"] = new SelectList(_context.Socios, "socioID", "inscripcion", utilidades.inscripcion);
-//            ViewData["interes"] = new SelectList(_context.Creditos, "creditoID", "interes", utilidades.interes);
-//            ViewData["totalCredito"] = new SelectList(_context.Creditos, "creditoID", "totalCredito", utilidades.totalCredito);
-//            ViewData["costoEvento"] = new SelectList(_context.Creditos, "creditoID", "costoEvento", utilidades.costoEvento);
-//            ViewData["montoAhorro"] = new SelectList(_context.Creditos, "creditoID", "montoAhorro", utilidades.montoAhorro);
-//            ViewData["costoPasivo"] = new SelectList(_context.Creditos, "creditoID", "costoPasivo", utilidades.costoPasivo);
-
-//            return View(utilidades);
-//        }
-
-//        // POST: Utilidades/Edit/5
-//        [HttpPost]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> Edit(int id, [Bind("utilidadID,utilidadTotal,utilidadPorSocio,interes,totalCredito,costoEvento,montoAhorro,costoPasivo,socioID,inscripcion")] Utilidades utilidades)
-//        {
-//            if (id != utilidades.utilidadID)
-//                return NotFound();
-
-//            if (ModelState.IsValid)
-//            {
-//                try
-//                {
-//                    var socioSeleccionado = await _context.Socios.FirstOrDefaultAsync(s => s.socioID == utilidades.socioID);
-//                    var creditoSeleccionado = await _context.Creditos.FirstOrDefaultAsync(c => c.socioID == utilidades.socioID);
-
-//                    if (socioSeleccionado != null && creditoSeleccionado != null)
-//                    {
-//                        utilidades.socioID = socioSeleccionado.socioID;
-//                        utilidades.creditoID = creditoSeleccionado.creditoID;
-
-//                        _context.Update(utilidades);
-//                        await _context.SaveChangesAsync();
-//                        return RedirectToAction(nameof(Index));
-//                    }
-//                    else
-//                    {
-//                        ModelState.AddModelError("Error", "El socio o el crédito seleccionado no existe.");
-//                    }
-//                }
-//                catch (DbUpdateConcurrencyException)
-//                {
-//                    if (!UtilidadesExists(utilidades.utilidadID))
-//                        return NotFound();
-//                    throw;
-//                }
-//            }
-
-//            // Recargar listas en caso de error
-//            ViewData["socio"] = new SelectList(_context.Socios, "socioID", "socio", utilidades.socioID);
-//            ViewData["inscripcion"] = new SelectList(_context.Socios, "socioID", "inscripcion", utilidades.inscripcion);
-//            ViewData["interes"] = new SelectList(_context.Creditos, "creditoID", "interes", utilidades.interes);
-//            ViewData["totalCredito"] = new SelectList(_context.Creditos, "creditoID", "totalCredito", utilidades.totalCredito);
-//            ViewData["costoEvento"] = new SelectList(_context.Creditos, "creditoID", "costoEvento", utilidades.costoEvento);
-//            ViewData["montoAhorro"] = new SelectList(_context.Creditos, "creditoID", "montoAhorro", utilidades.montoAhorro);
-//            ViewData["costoPasivo"] = new SelectList(_context.Creditos, "creditoID", "costoPasivo", utilidades.costoPasivo);
-
-//            return View(utilidades);
-//        }
-
-//        // GET: Utilidades/Delete/5
-//        public async Task<IActionResult> Delete(int? id)
-//        {
-//            if (id == null)
-//                return NotFound();
-
-//            var utilidades = await _context.Utilidades
-//                                           .Include(u => u.socios)
-//                                           .Include(u => u.creditos)
-//                                           .FirstOrDefaultAsync(m => m.utilidadID == id);
-//            if (utilidades == null)
-//                return NotFound();
-
-//            return View(utilidades);
-//        }
-
-//        // POST: Utilidades/Delete/5
-//        [HttpPost, ActionName("Delete")]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> DeleteConfirmed(int id)
-//        {
-//            var utilidades = await _context.Utilidades.FindAsync(id);
-//            _context.Utilidades.Remove(utilidades);
-//            await _context.SaveChangesAsync();
-//            return RedirectToAction(nameof(Index));
-//        }
-
-//        private bool UtilidadesExists(int id)
-//        {
-//            return _context.Utilidades.Any(e => e.utilidadID == id);
-//        }
-//    }
-//}
-
-
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -378,6 +6,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cooperativa.Data;
 using Cooperativa.Models;
+using System.Collections.Immutable;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace Cooperativa.Controllers
 {
@@ -390,15 +21,50 @@ namespace Cooperativa.Controllers
             _context = context;
         }
 
-        // GET: Utilidades
+        // GET: Socios
         public async Task<IActionResult> Index()
         {
-            var cooperativaContext = _context.Utilidades.Include(u => u.socios)
-                                                         .Include(u => u.creditos)
-                                                         .Include(u => u.eventos)
-                                                         .Include(u => u.ahorros)
-                                                         .Include(u => u.pasivos);
-            return View(await cooperativaContext.ToListAsync());
+            // Obtener el ID y el tipo de usuario (Socio o Cliente) desde los claims
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userRoleClaim = User.FindFirst("TipoUsuario")?.Value; // Obtienes el "TipoUsuario" (Socio o Cliente)
+
+            if (!int.TryParse(userIdClaim, out int userId))
+            {
+                TempData["ErrorMessage"] = "Usuario no válido";
+                return RedirectToAction("Index");
+            }
+            // Si es socio administrador (ID = 2)
+            if (userRoleClaim == "Socio" && userId == 2)
+            {
+                // El administrador ve todos los ahorros
+                var utilidades = await _context.Utilidades.ToListAsync();
+                return View(utilidades);
+            }
+
+            // Si es un socio normal
+            if (userRoleClaim == "Socio")
+            {
+                // Filtrar los ahorros por socioID
+                var utilidad = await _context.Utilidades
+                    .Where(a => a.socioID == userId)
+                    .ToListAsync();
+                return View(utilidad);
+            }
+
+            /*// Si es un cliente
+            if (userRoleClaim == "Cliente")
+            {
+                // Filtrar los ahorros por clienteID
+                var utilidad = await _context.Utilidades
+                    .Where(a => a.clienteID == userId)
+                    .ToListAsync();
+                return View(utilidad);
+            }*/
+
+            // Si el usuario no es socio, cerrar la sesión y redirigir al Home
+            await HttpContext.SignOutAsync(); // Esto cierra la sesión
+            TempData["ErrorMessage"] = "No tienes permisos para esta acción";
+            return RedirectToAction("Index", "Home"); // Redirigir al Home
         }
 
         // GET: Utilidades/Details/5
@@ -425,114 +91,103 @@ namespace Cooperativa.Controllers
         }
 
         // GET: Utilidades/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["socio"] = new SelectList(_context.Socios, "socio", "socio");
-            ViewData["inscripcion"] = new SelectList(_context.Socios, "inscripcion", "inscripcion");
-            ViewData["interes"] = new SelectList(_context.Creditos, "interes", "interes");
-            ViewData["totalCredito"] = new SelectList(_context.Creditos, "totalCredito", "totalCredito");
-            ViewData["costoEvento"] = new SelectList(_context.Eventos, "costoEvento", "costoEvento");
-            ViewData["montoAhorro"] = new SelectList(_context.Ahorros, "montoAhorro", "montoAhorro");
-            ViewData["costoPasivo"] = new SelectList(_context.Pasivos, "costoPasivo", "costoPasivo");
-            return View();
+            ViewBag.socio = new SelectList(await _context.Socios.ToListAsync(), "socio", "socio");
+            return View(new Utilidades());
         }
 
         // POST: Utilidades/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("utilidadID,utilidadTotal,utilidadPorSocio,socio,inscripcion,interes,totalCredito,costoEvento,montoAhorro,costoPasivo")] Utilidades utilidades)
+        public async Task<IActionResult> Create(Utilidades utilidades)
         {
+            // Verificar si el modelo es válido
             if (ModelState.IsValid)
             {
+                // Verificar si el socio seleccionado existe
+                var socioID = await _context.Socios.FirstOrDefaultAsync(sID => sID.socioID == utilidades.socioID);
+                var socio = await _context.Socios.FirstOrDefaultAsync(s => s.socio == utilidades.socio);
+                var credito = await _context.Creditos.FirstOrDefaultAsync(c => c.creditoID == c.creditoID);
+                var evento = await _context.Eventos.FirstOrDefaultAsync(e => e.eventoID == e.eventoID);
+                var ahorro = await _context.Ahorros.FirstOrDefaultAsync(a => a.ahorroID == a.ahorroID);
+                var pasivo = await _context.Pasivos.FirstOrDefaultAsync(p => p.pasivoID == p.pasivoID);
+
+                if (socio == null)
+                {
+                    // Si no se encuentra el socio, agregar error de modelo
+                    ModelState.AddModelError("", "El socio seleccionado no existe.");
+                    ViewBag.socio = new SelectList(_context.Socios, "socio", "socio");
+                    return View(utilidades);
+                }
+
+                // Realizar cálculos basados en el socio seleccionado
+                var totalAhorro = _context.Ahorros.Where(a => a.socioID == socio.socioID).Sum(a => (decimal?)a.montoAhorro) ?? 0;
+                var ahorroTotal = _context.Ahorros.Sum(a => (decimal?)a.montoAhorro) ?? 0;
+                var totalInteres = _context.Creditos.Sum(i => (decimal?)i.interes) ?? 0;
+                var totalCredito = _context.Creditos.Sum(c => (decimal?)c.totalCredito) ?? 0;
+                var totalEventos = _context.Eventos.Where(e => e.socioID == socio.socioID).Sum(e => (decimal?)e.costoEvento) ?? 0;
+                var eventosTotal = _context.Eventos.Sum(e => (decimal?)e.costoEvento) ?? 0;
+                var costoPasivo = _context.Pasivos.Sum(p => (decimal?)p.costoPasivo) ?? 0;
+
+                // Dividir el costo del pasivo entre el número total de socios
+                var totalSocios = _context.Socios.Count();
+                costoPasivo /= totalSocios;
+
+                // Realizar los cálculos de utilidad
+                var utilidadTotal = ahorroTotal + totalCredito + eventosTotal - costoPasivo;
+                var utilidadPorSocio = (totalEventos + totalAhorro) + ((totalAhorro / ahorroTotal) * totalInteres) - costoPasivo;
+
+                // Asignar los valores calculados al modelo para que se muestren en el formulario
+                utilidades.utilidadTotal = utilidadTotal;
+                utilidades.utilidadPorSocio = utilidadPorSocio;
+
+                //Asignar la fecha actual
                 utilidades.fechaUtilidad = DateTime.Now;
 
-                // Buscar el socio por su nombre
-                if (!string.IsNullOrEmpty(utilidades.socio))
+                utilidades.inscripcion = socio.inscripcion;
+                utilidades.interes = totalInteres;
+                utilidades.totalCredito = totalCredito;
+                utilidades.montoAhorro = totalAhorro;
+                utilidades.costoEvento = totalEventos;
+                utilidades.costoPasivo = costoPasivo;
+
+                //Asignar los valores al modelo para guardarlos
+                utilidades.socioID = socio.socioID;
+
+                if (credito != null)
                 {
-                    var socioSeleccionado = await _context.Socios.FirstOrDefaultAsync(s => s.socio == utilidades.socio);
-                    if (socioSeleccionado != null)
-                    {
-                        utilidades.socioID = socioSeleccionado.socioID; // Asigna el ID del socio seleccionado
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("socio", "El socio seleccionado no existe.");
-                        ViewData["socio"] = new SelectList(await _context.Socios.ToListAsync(), "socioID", "socio");
-                        return View(utilidades);
-                    }
+                    utilidades.creditoID = credito.creditoID;
                 }
 
-                if (utilidades.interes > 0)
+                if (evento != null)
                 {
-                    var interesSeleccionado = await _context.Creditos.FirstOrDefaultAsync(b => b.interes == utilidades.interes);
-                    if (interesSeleccionado != null)
-                    {
-                        utilidades.creditoID = interesSeleccionado.creditoID;
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("utilidad", "La utilidad seleccionada no existe.");
-                        ViewData["interes"] = new SelectList(await _context.Creditos.ToListAsync(), "CreditoID", "interes");
-                        return View(utilidades);
-                    }
+                    utilidades.eventoID = evento.eventoID;
                 }
 
-                if (utilidades.costoEvento > 0)
+                if (ahorro != null)
                 {
-                    var costoEventoSeleccionado = await _context.Eventos.FirstOrDefaultAsync(u => u.costoEvento == utilidades.costoEvento);
-                    if (costoEventoSeleccionado != null)
-                    {
-                        utilidades.eventoID = costoEventoSeleccionado.eventoID;
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("evento", "El evento seleccionado no existe.");
-                        ViewData["costoEvento"] = new SelectList(await _context.Eventos.ToListAsync(), "eventoID", "costoEvento");
-                        return View(utilidades);
-                    }
+                    utilidades.ahorroID = ahorro.ahorroID;
                 }
 
-                if (utilidades.montoAhorro > 0)
+                if (pasivo != null)
                 {
-                    var montoAhorroSeleccionado = await _context.Ahorros.FirstOrDefaultAsync(u => u.montoAhorro == utilidades.montoAhorro);
-                    if (montoAhorroSeleccionado != null)
-                    {
-                        utilidades.ahorroID = montoAhorroSeleccionado.ahorroID;
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("ahorro", "El ahorro seleccionado no existe.");
-                        ViewData["montoAhorro"] = new SelectList(await _context.Ahorros.ToListAsync(), "ahorroID", "montoAhorro");
-                        return View(utilidades);
-                    }
+                    utilidades.pasivoID = pasivo.pasivoID;
                 }
 
-                if (utilidades.costoPasivo > 0)
-                {
-                    var costoPasivoSeleccionado = await _context.Pasivos.FirstOrDefaultAsync(u => u.costoPasivo == utilidades.costoPasivo);
-                    if (costoPasivoSeleccionado != null)
-                    {
-                        utilidades.pasivoID = costoPasivoSeleccionado.pasivoID;
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("pasivo", "El pasivo seleccionado no existe.");
-                        ViewData["costoPasivo"] = new SelectList(await _context.Pasivos.ToListAsync(), "pasivoID", "costoPasivo");
-                        return View(utilidades);
-                    }
-                }
 
-                _context.Add(utilidades);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Guardar los datos de la utilidad en la base de datos si es necesario
+                _context.Utilidades.Add(utilidades);
+                _context.SaveChanges();
+
+                // Volver a cargar la lista de socios en el ViewBag para el dropdown
+                ViewBag.socio = new SelectList(_context.Socios, "socio", "socio");
+
+                // Redirigir a la vista de detalles o lista después de guardar
+                return RedirectToAction(nameof(Index)); // Puedes redirigir a la vista que prefieras
             }
-            ViewData["socio"] = new SelectList(await _context.Socios.ToListAsync(), "socio", "socio");
-            ViewData["inscripcion"] = new SelectList(await _context.Socios.ToListAsync(), "inscripcion", "inscripcion");
-            ViewData["interes"] = new SelectList(await _context.Creditos.ToListAsync(), "interes", "interes");
-            ViewData["totalCredito"] = new SelectList(await _context.Creditos.ToListAsync(), "totalCredito", "totalCredito");
-            ViewData["costoEvento"] = new SelectList(await _context.Eventos.ToListAsync(), "costoEvento", "costoEvento");
-            ViewData["montoAhorro"] = new SelectList(await _context.Ahorros.ToListAsync(), "montoAhorro", "montoAhorro");
-            ViewData["costoPasivo"] = new SelectList(await _context.Pasivos.ToListAsync(), "costoPasivo", "costoPasivo");
+
+            // Si el modelo no es válido, cargar el select de socios y volver a mostrar el formulario
+            ViewBag.socio = new SelectList(_context.Socios, "socio", "socio");
             return View(utilidades);
         }
 
@@ -550,172 +205,296 @@ namespace Cooperativa.Controllers
                 return NotFound();
             }
             ViewData["socio"] = new SelectList(_context.Set<Socios>(), "socio", "socio", utilidades.socio);
-            ViewData["inscripcion"] = new SelectList(_context.Set<Socios>(), "inscripcion", "inscripcion", utilidades.inscripcion);
-            ViewData["interes"] = new SelectList(_context.Set<Creditos>(), "interes", "interes", utilidades.interes);
-            ViewData["totalCredito"] = new SelectList(_context.Set<Creditos>(), "totalCredito", "totalCredito", utilidades.totalCredito);
-            ViewData["costoEvento"] = new SelectList(_context.Set<Eventos>(), "costoEvento", "costoEvento", utilidades.costoEvento);
-            ViewData["montoAhorro"] = new SelectList(_context.Set<Ahorros>(), "montoAhorro", "montoAhorro", utilidades.montoAhorro);
-            ViewData["costoPasivo"] = new SelectList(_context.Set<Pasivos>(), "costoPasivo", "costoPasivo", utilidades.costoPasivo);
             return View(utilidades);
         }
 
         // POST: Utilidades/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("utilidadID,socio,utilidadTotal,utilidadPorSocio,fechaUtilidad,inscripcion,interes,totalCredito,costoEvento,montoAhorro,costoPasivo")] Utilidades utilidades)
+        public async Task<IActionResult> Edit(Utilidades utilidades)
         {
-            if (id != utilidades.utilidadID)
-            {
-                return NotFound();
-            }
-
+            // Verificar si el modelo es válido
             if (ModelState.IsValid)
             {
-                try
+                // Verificar si el socio seleccionado existe
+                var socioID = await _context.Socios.FirstOrDefaultAsync(sID => sID.socioID == utilidades.socioID);
+                var socio = await _context.Socios.FirstOrDefaultAsync(s => s.socio == utilidades.socio);
+                var credito = await _context.Creditos.FirstOrDefaultAsync(c => c.creditoID == c.creditoID);
+                var evento = await _context.Eventos.FirstOrDefaultAsync(e => e.eventoID == e.eventoID);
+                var ahorro = await _context.Ahorros.FirstOrDefaultAsync(a => a.ahorroID == a.ahorroID);
+                var pasivo = await _context.Pasivos.FirstOrDefaultAsync(p => p.pasivoID == p.pasivoID);
+
+                if (socio == null)
                 {
-                    // Buscar el socio por su nombre
-                    if (!string.IsNullOrEmpty(utilidades.socio))
-                    {
-                        var socioSeleccionado = await _context.Socios.FirstOrDefaultAsync(s => s.socio == utilidades.socio);
-                        if (socioSeleccionado != null)
-                        {
-                            utilidades.socioID = socioSeleccionado.socioID; // Asigna el ID del socio seleccionado
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("socio", "El socio seleccionado no existe.");
-                            ViewData["socio"] = new SelectList(await _context.Socios.ToListAsync(), "socioID", "socio");
-                            return View(utilidades);
-                        }
-                    }
-
-                    if (utilidades.interes > 0)
-                    {
-                        var interesSeleccionado = await _context.Creditos.FirstOrDefaultAsync(b => b.interes == utilidades.interes);
-                        if (interesSeleccionado != null)
-                        {
-                            utilidades.creditoID = interesSeleccionado.creditoID;
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("utilidad", "La utilidad seleccionada no existe.");
-                            ViewData["interes"] = new SelectList(await _context.Creditos.ToListAsync(), "interes", "interes");
-                            return View(utilidades);
-                        }
-                    }
-
-                    if (utilidades.costoEvento > 0)
-                    {
-                        var costoEventoSeleccionado = await _context.Eventos.FirstOrDefaultAsync(u => u.costoEvento == utilidades.costoEvento);
-                        if (costoEventoSeleccionado != null)
-                        {
-                            utilidades.eventoID = costoEventoSeleccionado.eventoID;
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("evento", "El evento seleccionado no existe.");
-                            ViewData["costoEvento"] = new SelectList(await _context.Eventos.ToListAsync(), "costoEvento", "costoEvento");
-                            return View(utilidades);
-                        }
-                    }
-
-                    if (utilidades.montoAhorro > 0)
-                    {
-                        var montoAhorroSeleccionado = await _context.Ahorros.FirstOrDefaultAsync(u => u.montoAhorro == utilidades.montoAhorro);
-                        if (montoAhorroSeleccionado != null)
-                        {
-                            utilidades.ahorroID = montoAhorroSeleccionado.ahorroID;
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("ahorro", "El ahorro seleccionado no existe.");
-                            ViewData["montoAhorro"] = new SelectList(await _context.Ahorros.ToListAsync(), "montoAhorro", "montoAhorro");
-                            return View(utilidades);
-                        }
-                    }
-
-                    if (utilidades.costoPasivo > 0)
-                    {
-                        var costoPasivoSeleccionado = await _context.Pasivos.FirstOrDefaultAsync(u => u.costoPasivo == utilidades.costoPasivo);
-                        if (costoPasivoSeleccionado != null)
-                        {
-                            utilidades.pasivoID = costoPasivoSeleccionado.pasivoID;
-                        }
-                        else
-                        {
-                            ModelState.AddModelError("pasivo", "El pasivo seleccionado no existe.");
-                            ViewData["costoPasivo"] = new SelectList(await _context.Pasivos.ToListAsync(), "costoPasivo", "costoPasivo");
-                            return View(utilidades);
-                        }
-                    }
-
-                    _context.Update(utilidades);
-                    await _context.SaveChangesAsync();
+                    // Si no se encuentra el socio, agregar error de modelo
+                    ModelState.AddModelError("", "El socio seleccionado no existe.");
+                    ViewBag.socio = new SelectList(_context.Socios, "socio", "socio");
+                    return View(utilidades);
                 }
-                catch (DbUpdateConcurrencyException)
+
+                // Realizar cálculos basados en el socio seleccionado
+                var totalAhorro = _context.Ahorros.Where(a => a.socioID == socio.socioID).Sum(a => (decimal?)a.montoAhorro) ?? 0;
+                var ahorroTotal = _context.Ahorros.Sum(a => (decimal?)a.montoAhorro) ?? 0;
+                var totalInteres = _context.Creditos.Sum(i => (decimal?)i.interes) ?? 0;
+                var totalCredito = _context.Creditos.Sum(c => (decimal?)c.totalCredito) ?? 0;
+                var totalEventos = _context.Eventos.Where(e => e.socioID == socio.socioID).Sum(e => (decimal?)e.costoEvento) ?? 0;
+                var eventosTotal = _context.Eventos.Sum(e => (decimal?)e.costoEvento) ?? 0;
+                var costoPasivo = _context.Pasivos.Sum(p => (decimal?)p.costoPasivo) ?? 0;
+
+                // Dividir el costo del pasivo entre el número total de socios
+                var totalSocios = _context.Socios.Count();
+                costoPasivo /= totalSocios;
+
+                // Realizar los cálculos de utilidad
+                var utilidadTotal = ahorroTotal + totalCredito + eventosTotal - costoPasivo;
+                var utilidadPorSocio = (totalEventos + totalAhorro) + ((totalAhorro / ahorroTotal) * totalInteres) - costoPasivo;
+
+                // Asignar los valores calculados al modelo para que se muestren en el formulario
+                utilidades.utilidadTotal = utilidadTotal;
+                utilidades.utilidadPorSocio = utilidadPorSocio;
+
+                //Asignar la fecha actual
+                utilidades.fechaUtilidad = DateTime.Now;
+
+                utilidades.inscripcion = socio.inscripcion;
+                utilidades.interes = totalInteres;
+                utilidades.totalCredito = totalCredito;
+                utilidades.montoAhorro = totalAhorro;
+                utilidades.costoEvento = totalEventos;
+                utilidades.costoPasivo = costoPasivo;
+
+                //Asignar los valores al modelo para guardarlos
+                utilidades.socioID = socio.socioID;
+
+                if (credito != null)
                 {
-                    if (!UtilidadesExists(utilidades.utilidadID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    utilidades.creditoID = credito.creditoID;
                 }
-                return RedirectToAction(nameof(Index));
+
+                if (evento != null)
+                {
+                    utilidades.eventoID = evento.eventoID;
+                }
+
+                if (ahorro != null)
+                {
+                    utilidades.ahorroID = ahorro.ahorroID;
+                }
+
+                if (pasivo != null)
+                {
+                    utilidades.pasivoID = pasivo.pasivoID;
+                }
+
+
+                // Guardar los datos de la utilidad en la base de datos si es necesario
+                _context.Utilidades.Update(utilidades);
+                _context.SaveChanges();
+
+                // Volver a cargar la lista de socios en el ViewBag para el dropdown
+                ViewBag.socio = new SelectList(_context.Socios, "socio", "socio");
+
+                // Redirigir a la vista de detalles o lista después de guardar
+                return RedirectToAction(nameof(Index)); // Puedes redirigir a la vista que prefieras
             }
-            ViewData["socio"] = new SelectList(await _context.Socios.ToListAsync(), "socio", "socio", utilidades.socio);
-            ViewData["inscripcion"] = new SelectList(await _context.Socios.ToListAsync(), "inscripcion", "inscripcion", utilidades.inscripcion);
-            ViewData["interes"] = new SelectList(await _context.Creditos.ToListAsync(), "interes", "interes", utilidades.interes);
-            ViewData["totalCredito"] = new SelectList(await _context.Creditos.ToListAsync(), "totalCredito", "totalCredito", utilidades.totalCredito);
-            ViewData["costoEvento"] = new SelectList(await _context.Eventos.ToListAsync(), "costoEvento", "costoEvento", utilidades.costoEvento);
-            ViewData["montoAhorro"] = new SelectList(await _context.Ahorros.ToListAsync(), "montoAhorro", "montoAhorro", utilidades.montoAhorro);
-            ViewData["costoPasivo"] = new SelectList(await _context.Pasivos.ToListAsync(), "costoPasivo", "costoPasivo", utilidades.costoPasivo);
+
+            // Si el modelo no es válido, cargar el select de socios y volver a mostrar el formulario
+            ViewBag.socio = new SelectList(_context.Socios, "socio", "socio");
             return View(utilidades);
         }
 
         // GET: Utilidades/Delete/5
         public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var utilidades = await _context.Utilidades
+                    .Include(u => u.socios)
+                    .Include(u => u.creditos)
+                    .Include(u => u.eventos)
+                    .Include(u => u.ahorros)
+                    .Include(u => u.pasivos)
+                    .FirstOrDefaultAsync(m => m.utilidadID == id);
+                if (utilidades == null)
+                {
+                    return NotFound();
+                }
+
+                return View(utilidades);
+           }
+
+         // POST: Utilidades/Delete/5
+         [HttpPost, ActionName("Delete")]
+         [ValidateAntiForgeryToken]
+            public async Task<IActionResult> DeleteConfirmed(int id)
+            {
+                var utilidades = await _context.Utilidades.FindAsync(id);
+                if (utilidades != null)
+                {
+                    _context.Utilidades.Remove(utilidades);
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
 
-            var utilidades = await _context.Utilidades
-                .Include(u => u.socios)
-                .Include(u => u.creditos)
-                .Include(u => u.eventos)
-                .Include(u => u.ahorros)
-                .Include(u => u.pasivos)
-                .FirstOrDefaultAsync(m => m.utilidadID == id);
-            if (utilidades == null)
+            private bool UtilidadesExists(int id)
             {
-                return NotFound();
+                return _context.Utilidades.Any(e => e.utilidadID == id);
             }
 
-            return View(utilidades);
-        }
 
-        // POST: Utilidades/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        //// Método para obtener los socios con más utilidades en un rango de fechas
+        //public async Task<IActionResult> GetTopSociosByUtilidades(DateTime startDate, DateTime endDate)
+        //{
+        //    var topSocios = await _context.Utilidades
+        //        .Where(u => u.fechaUtilidad >= startDate && u.fechaUtilidad <= endDate)
+        //        .GroupBy(u => u.socioID)
+        //        .Select(g => new
+        //        {
+        //            SocioID = g.Key,
+        //            NombreSocio = g.FirstOrDefault().socio, // Asumiendo que 'socio' tiene el nombre del socio
+        //            TotalUtilidad = g.Sum(u => u.utilidadPorSocio)
+        //        })
+        //        .OrderByDescending(s => s.TotalUtilidad)
+        //        .ToListAsync();
+
+        //    // Puedes devolver estos datos a una vista o simplemente redirigir con los resultados
+        //    ViewBag.TopSocios = topSocios;
+        //    return View(); // Crear una vista para mostrar los resultados
+        //}
+
+        //public async Task<IActionResult> SociosConMayorUtilidad(DateTime fechaInicio, DateTime fechaFin)
+        //{
+        //    // Consulta para obtener la utilidad total por socio en el rango de fechas especificado
+        //    var resultado = await _context.Utilidades
+        //        .Where(u => u.fechaUtilidad >= fechaInicio && u.fechaUtilidad <= fechaFin)
+        //        .GroupBy(u => u.socioID)
+        //        .Select(g => new
+        //        {
+        //            SocioID = g.Key,
+        //            SocioNombre = g.FirstOrDefault().socio,
+        //            UtilidadTotal = g.Sum(u => u.utilidadPorSocio)
+        //        })
+        //        .OrderByDescending(s => s.UtilidadTotal)
+        //        .ToListAsync();
+
+        //    return View(resultado);
+        //}
+
+        //public async Task<IActionResult> SociosConMayorUtilidad(DateTime fechaInicio, DateTime fechaFin)
+        //{
+        //    // Consulta para obtener la utilidad total por socio en el rango de fechas especificado
+        //    var resultado = await _context.Utilidades
+        //        .Where(u => u.fechaUtilidad >= fechaInicio && u.fechaUtilidad <= fechaFin)
+        //        .GroupBy(u => u.socioID)
+        //        .Select(g => new
+        //        {
+        //            SocioID = g.Key,
+        //            SocioNombre = g.FirstOrDefault().socio,
+        //            UtilidadTotal = g.Sum(u => u.utilidadPorSocio)
+        //        })
+        //        .OrderByDescending(s => s.UtilidadTotal)
+        //        .FirstOrDefaultAsync(); // Obtener solo el socio con la mayor utilidad
+
+        //    // Verificar si hay resultados
+        //    if (resultado == null)
+        //    {
+        //        ViewBag.NoResultsMessage = "No se encontraron socios con utilidad en el rango de fechas especificado.";
+        //        return View();
+        //    }
+
+        //    return View(resultado); // Pasar solo el socio con mayor utilidad
+        //}
+
+        //public async Task<IActionResult> SociosConMayorUtilidad(DateTime fechaInicio, DateTime fechaFin)
+        //{
+        //    // Consulta para obtener la utilidad total por socio en el rango de fechas especificado
+        //    var resultado = await _context.Utilidades
+        //        .Where(u => u.fechaUtilidad >= fechaInicio && u.fechaUtilidad <= fechaFin)
+        //        .GroupBy(u => u.socioID)
+        //        .Select(g => new
+        //        {
+        //            SocioID = g.Key,
+        //            SocioNombre = g.FirstOrDefault().socio, // Asumiendo que 'socio' tiene el nombre del socio
+        //            UtilidadTotal = g.Sum(u => u.utilidadPorSocio)
+        //        })
+        //        .OrderByDescending(s => s.UtilidadTotal) // Ordena por la mayor utilidad
+        //        //.ToListAsync();
+        //        .FirstOrDefaultAsync(); // Obtener solo el primer socio, el que tiene la mayor utilidad
+
+        //    // Verificar si hay resultados
+        //    if (resultado == null)
+        //    {
+        //        ViewBag.NoResultsMessage = "No se encontraron socios con utilidad en el rango de fechas especificado.";
+        //        return View();
+        //    }
+
+        //    return View(resultado); // Pasar solo el socio con mayor utilidad
+        //}
+
+        //public async Task<IActionResult> SociosConMayorUtilidad(DateTime fechaInicio, DateTime fechaFin)
+        //{
+        //    // Consulta para obtener la utilidad total por socio en el rango de fechas especificado
+        //    var resultado = await _context.Utilidades
+        //        .Where(u => u.fechaUtilidad >= fechaInicio && u.fechaUtilidad <= fechaFin)
+        //        .GroupBy(u => u.socioID)
+        //        .Select(g => new
+        //        {
+        //            SocioID = g.Key,
+        //            SocioNombre = g.FirstOrDefault().socio, // Asumiendo que 'socio' tiene el nombre del socio
+        //            UtilidadTotal = g.Sum(u => u.utilidadPorSocio)
+        //        })
+        //        .OrderBy(s => s.UtilidadTotal) // Ordena por la mayor utilidad
+        //        .Take(5) // Obtén los 5 socios con mayores utilidades
+        //        .ToListAsync(); // Ejecuta la consulta y obtiene los resultados
+
+        //    // Verificar si hay resultados
+        //    if (resultado == null || !resultado.Any())
+        //    {
+        //        ViewBag.NoResultsMessage = "No se encontraron socios con utilidad en el rango de fechas especificado.";
+        //        return View();
+        //    }
+
+        //    return View(resultado); // Pasar la lista de los 5 socios con mayores utilidades
+        //}
+
+
+        public async Task<IActionResult> SociosConMayorUtilidad(DateTime fechaInicio, DateTime fechaFin)
         {
-            var utilidades = await _context.Utilidades.FindAsync(id);
-            if (utilidades != null)
+            // Ajustar las fechas para manejar solo la parte del día (sin horas)
+            var fechaInicioSinHora = fechaInicio.Date;
+            var fechaFinSinHora = fechaFin.Date.AddDays(1).AddMilliseconds(-1); 
+
+            // Consulta para obtener los socios con utilidades
+            var resultado = await _context.Utilidades
+                .Where(u => u.fechaUtilidad >= fechaInicioSinHora && u.fechaUtilidad <= fechaFinSinHora) 
+                .GroupBy(u => u.socioID)
+                .Select(g => new
+                {
+                    SocioID = g.Key,
+                    SocioNombre = g.FirstOrDefault().socio, 
+                    UtilidadTotal = g.Sum(u => u.utilidadPorSocio) 
+                })
+                .Where(g => _context.Socios.Any(s => s.socioID == g.SocioID)) 
+                .OrderByDescending(s => s.UtilidadTotal) 
+                .Take(5) 
+                .ToListAsync(); 
+
+            // Verificar si hay resultados
+            if (resultado == null || !resultado.Any())
             {
-                _context.Utilidades.Remove(utilidades);
+                ViewBag.NoResultsMessage = "No se encontraron socios con utilidad en el rango de fechas especificado.";
+                return View();
             }
 
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View(resultado); 
         }
 
-        private bool UtilidadesExists(int id)
-        {
-            return _context.Utilidades.Any(e => e.utilidadID == id);
-        }
+
+
     }
+
 }

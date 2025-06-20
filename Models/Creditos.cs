@@ -7,17 +7,33 @@ namespace Cooperativa.Models
     {
         [Key]
         public int creditoID { get; set; }
-        public double montoCredito { get; set; }
+        [Required]
+        public decimal montoCredito { get; set; }
+        [Required]
         public DateTime fechaCredito { get; set; }
+        [Required]
+        public String? tipoCredito { get; set; }
+        [Required]
         public int tiempo { get; set; }
-        public double interes { get; set; }
-        public double cuota { get; set; }
+        [Required]
+        public decimal interes { get; set; }
+        [Required]
+        public decimal cuota { get; set; }
+        [Required]
         public String? estado { get; set; }
-        public double totalCredito { get; set; }
+        [Required]
+        public decimal totalCredito { get; set; }
 
         [ForeignKey("socioID")]
         public Socios? socios { get; set; }
-        public int socioID { get; set; }
+        public int? socioID { get; set; }
+        
         public String? socio { get; set; }
+
+        [ForeignKey("clienteID")]
+        public Clientes? clientes { get; set; }
+        public int? clienteID { get; set; }
+        
+        public String? cliente { get; set; }
     }
 }

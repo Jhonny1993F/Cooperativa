@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Cooperativa.Data;
 using Cooperativa.Models;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace Cooperativa.Controllers
 {
@@ -19,10 +21,50 @@ namespace Cooperativa.Controllers
             _context = context;
         }
 
-        // GET: Pasivos
+        // GET: Socios
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Pasivos.ToListAsync());
+            // Obtener el ID y el tipo de usuario (Socio o Cliente) desde los claims
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userRoleClaim = User.FindFirst("TipoUsuario")?.Value; // Obtienes el "TipoUsuario" (Socio o Cliente)
+
+            if (!int.TryParse(userIdClaim, out int userId))
+            {
+                TempData["ErrorMessage"] = "Usuario no válido";
+                return RedirectToAction("Index");
+            }
+            // Si es socio administrador (ID = 2)
+            if (userRoleClaim == "Socio" && userId == 2)
+            {
+                // El administrador ve todos los ahorros
+                var pasivos = await _context.Pasivos.ToListAsync();
+                return View(pasivos);
+            }
+
+            /*// Si es un socio normal
+            if (userRoleClaim == "Socio")
+            {
+                // Filtrar los ahorros por socioID
+                var pasivo = await _context.Pasivos
+                    .Where(a => a.socioID == userId)
+                    .ToListAsync();
+                return View(pasivo);
+            }
+
+            // Si es un cliente
+            if (userRoleClaim == "Cliente")
+            {
+                // Filtrar los ahorros por clienteID
+                var pasivo = await _context.Pasivos
+                    .Where(a => a.clienteID == userId)
+                    .ToListAsync();
+                return View(pasivo);
+            }*/
+
+            // Si el usuario no es socio, cerrar la sesión y redirigir al Home
+            await HttpContext.SignOutAsync(); // Esto cierra la sesión
+            TempData["ErrorMessage"] = "No tienes permisos para esta acción";
+            return RedirectToAction("Index", "Home"); // Redirigir al Home
         }
 
         // GET: Pasivos/Details/5

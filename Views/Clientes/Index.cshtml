@@ -1,50 +1,107 @@
 ﻿@model IEnumerable<Cooperativa.Models.Clientes>
+@using System.Security.Claims
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    /*//var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var tipoUsuario = User?.FindFirst("TipoUsuario")?.Value; // Recuperar tipo de usuario
+
+    string usuario = ViewBag.TipoUsuario ?? "Desconocido";
+    bool isAdmin = ViewBag.IsAdmin ?? false; // Solo será true si es Socio con ID 2
+
+    //bool isAdmin = userId == "2"; // El ID 2 es el administrador
+    bool isSocio = tipoUsuario == "Socio"; // Si está en la tabla SOCIOS
+    bool isCliente = tipoUsuario == "Cliente"; // Si está en la tabla CLIENTES*/
+
+    var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var admin = User?.FindFirst("Admin")?.Value; // Recuoera al admin
+    var tipoUsuario = User?.FindFirst("TipoUsuario")?.Value; // Recuperar tipo de usuario
+
+    bool isAdmin = admin == "Administrador"; // El ID 2 es el administrador
+    bool isSocio = tipoUsuario == "Socio"; // Si está en la tabla SOCIOS
+    bool isCliente = tipoUsuario == "Cliente"; // Si está en la tabla CLIENTES
+
+    if (isAdmin)
+    {
+        Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    }
+    else if (isSocio)
+    {
+        Layout = "~/Views/Shared/GeneralLayout.cshtml";
+    }
+    else if (isCliente)
+    {
+        Layout = "~/Views/Shared/UsuarioLayout.cshtml";
+    }
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Clientes</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@* <p>
+    <a asp-action="Create">Crear nuevo</a>
+</p> *@
+<div style="overflow-x: auto; width: 100%;">
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.nombres)
+                @* @Html.DisplayNameFor(model => model.nombres) *@
+                <label> Nombres:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.apellidos)
+                @* @Html.DisplayNameFor(model => model.apellidos) *@
+                <label> Apellidos:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cedula)
+                @* @Html.DisplayNameFor(model => model.cedula) *@
+                <label> Cedula:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.fechaNacimiento)
+                @* @Html.DisplayNameFor(model => model.fechaNacimiento) *@
+                <label> Fecha de nacimiento:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.direccion)
+                @* @Html.DisplayNameFor(model => model.direccion) *@
+                <label> Dirección:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.telefono)
+                @* @Html.DisplayNameFor(model => model.telefono) *@
+                <label> Telefono:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cliente)
+                @* @Html.DisplayNameFor(model => model.cliente) *@
+                <label> Cliente:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.inscripcion)
+                @* @Html.DisplayNameFor(model => model.inscripcion) *@
+                <label> Inscripcion:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.correo)
+                @* @Html.DisplayNameFor(model => model.correo) *@
+                <label> Correo elctronico:</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.contraseña)
+                @* @Html.DisplayNameFor(model => model.contraseña) *@
+                <label> Contraseña:</label>
             </th>
             <th></th>
         </tr>
@@ -83,11 +140,12 @@
                 @Html.DisplayFor(modelItem => item.contraseña)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.clienteID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.clienteID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.clienteID">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.clienteID">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.clienteID">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.clienteID">Eliminar</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>

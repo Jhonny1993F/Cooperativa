@@ -1,64 +1,200 @@
 ﻿@model IEnumerable<Cooperativa.Models.Ahorros>
+@using System.Security.Claims
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var admin = User?.FindFirst("Admin")?.Value; // Recuoera al admin 
+    var tipoUsuario = User?.FindFirst("TipoUsuario")?.Value; // Recuperar tipo de usuario
+
+    bool isAdmin = admin == "Administrador"; // El ID 2 es el administrador
+    bool isSocio = tipoUsuario == "Socio"; // Si está en la tabla SOCIOS
+    bool isCliente = tipoUsuario == "Cliente"; // Si está en la tabla CLIENTES
+
+    if (isAdmin)
+    {
+        Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    }
+    else if (isSocio)
+    {
+        Layout = "~/Views/Shared/GeneralLayout.cshtml";
+    }
+    else if (isCliente)
+    {
+        Layout = "~/Views/Shared/UsuarioLayout.cshtml";
+    }
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
 }
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Ahorros</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo ahorro</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @* @Html.DisplayNameFor(model => model.montoAhorro) *@
-                <label> Monto de ahorro</label>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.comprobante)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.fechaAhorro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.detalleAhorro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.socio)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.montoAhorro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.comprobante)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.fechaAhorro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.detalleAhorro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.socio)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ahorroID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ahorroID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ahorroID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div style="overflow-x: auto; width: 100%;">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @* @Html.DisplayNameFor(model => model.montoAhorro) *@
+                    <label> Monto del ahorro:</label>
+                </th>
+                <th>
+                    <label> Comprobante:</label>
+                    @* @Html.DisplayNameFor(model => model.comprobante) *@
+                </th>
+                <th>
+                    <label> Fecha del ahorro:</label>
+                    @* @Html.DisplayNameFor(model => model.fechaAhorro) *@
+                </th>
+                <th>
+                    <label> Detalle del ahorro:</label>
+                    @* @Html.DisplayNameFor(model => model.detalleAhorro) *@
+                </th>
+                @if (isAdmin)
+                {
+                    <th>
+                        <label> Socio:</label>
+                        @* @Html.DisplayNameFor(model => model.socio) *@
+                    </th>
+                    <th>
+                        <label> Cliente:</label>
+                        @* @Html.DisplayNameFor(model => model.socio) *@
+                    </th>
+                }
+                else if (isSocio)
+                {
+                    <th>
+                        <label> Socio:</label>
+                        @* @Html.DisplayNameFor(model => model.socio) *@
+                    </th>
+                }
+                else if (isCliente)
+                {
+                    <th>
+                        <label> Cliente:</label>
+                        @* @Html.DisplayNameFor(model => model.socio) *@
+                    </th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.montoAhorro)
+                    </td>
+                    @* <!-- Mostrar la imagen en el index y modal agrandar imagen -->
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ComprobanteBase64))
+                        {
+                            <!-- Imagen pequeña que abrirá el modal -->
+                            <a href="#img-@item.ahorroID">
+                                <img src="data:image/jpeg;base64,@item.ComprobanteBase64" alt="Comprobante" height="100" width="100" />
+                            </a>
+
+                            <!-- Modal de la imagen ampliada -->
+                            <div id="img-@item.ahorroID" class="modal">
+                                <span class="close">&times;</span>
+                                <img class="modal-content" src="data:image/jpeg;base64,@item.ComprobanteBase64" />
+                                <div id="caption">Comprobante</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <span>No disponible</span>
+                        }
+                    </td> *@
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.comprobante))
+                        {
+                            <!-- Imagen pequeña que abrirá el modal -->
+                            <a href="#img-@item.ahorroID">
+                                <img src="@item.comprobante" alt="Comprobante" height="100" width="100" />
+                            </a>
+
+                            <!-- Modal de la imagen ampliada -->
+                            <div id="img-@item.ahorroID" class="modal">
+                                <span class="close">&times;</span>
+                                <img class="modal-content" src="@item.comprobante" />
+                                <div id="caption">Comprobante</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <span>No disponible</span>
+                        }
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.fechaAhorro)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.detalleAhorro)
+                    </td>
+                    @if (isAdmin)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.socio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cliente)
+                        </td>
+                    }
+                    else if (isSocio)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.socio)
+                        </td>
+                    }
+                    else if (isCliente)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.cliente)
+                        </td>
+                    }
+                    @if (isAdmin)
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ahorroID">Editar</a> |
+                            <a asp-action="Details" asp-route-id="@item.ahorroID">Detalles</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ahorroID">Eliminar</a>
+                        </td>
+                    }
+                    else if (isSocio)
+                    {
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.ahorroID">Detalles</a>
+                        </td>
+                    }
+                    else if (isCliente)
+                    {
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.ahorroID">Detalles</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

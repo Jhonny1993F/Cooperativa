@@ -1,9 +1,21 @@
-﻿@{
-    Layout = "~/Views/Shared/UsuarioLayout.cshtml";
-}
+﻿@using System.Security.Claims
 
 @{
-    ViewData["Title"] = "Index";
+    var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var tipoUsuario = User?.FindFirst("TipoUsuario")?.Value; // Recuperar tipo de usuario
+
+    //bool isAdmin = userId == "2"; // El ID 2 es el administrador
+    bool isSocio = tipoUsuario == "Socio"; // Si está en la tabla SOCIOS
+    bool isCliente = tipoUsuario == "Cliente"; // Si está en la tabla CLIENTES
+    
+    if (isSocio)
+    {
+        Layout = "~/Views/Shared/GeneralLayout.cshtml";
+    }
+    else if (isCliente)
+    {
+        Layout = "~/Views/Shared/UsuarioLayout.cshtml";
+    }
 }
 
 <h2>Bienvenido</h2>

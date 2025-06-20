@@ -1,0 +1,65 @@
+﻿## Archivos de Visual Studio
+.vs/
+*.user
+*.suo
+*.sdf
+*.cache
+*.dbmdl
+*.db
+*.VC.db
+*.pdb
+*.tlog
+*.log
+
+## Archivos de compilación
+bin/
+obj/
+out/
+Generated\ Files/
+
+## Publicación
+Properties/PublishProfiles/*.user
+**/PublishProfiles/*.user
+*.pubxml.user
+*.publish.xml
+
+## Archivos temporales y del sistema
+*.tmp
+*.temp
+*.bak
+*.swp
+*.DS_Store
+Thumbs.db
+ehthumbs.db
+
+## Archivos de paquetes NuGet
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+## Archivos de build de Rider/Resharper
+.idea/
+*.sln.iml
+
+## Archivos del sistema operativo
+desktop.ini
+$RECYCLE.BIN/
+
+## Archivos de configuración de usuario
+*.vspscc
+*.vssscc
+
+## Archivos de logs
+*.log
+
+## Configuración de Rider/JetBrains
+*.DotSettings.user
+
+## Archivos de configuración de entorno
+.env
+.env.*
+
+## Archivos de publicación temporal
+wwwroot/lib/

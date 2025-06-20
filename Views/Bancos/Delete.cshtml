@@ -1,52 +1,76 @@
-﻿@model Cooperativa.Models.Bancos
+﻿@using System.Security.Claims
+@model Cooperativa.Models.Bancos
 
 @{
-    Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    var userId = User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var tipoUsuario = User?.FindFirst("TipoUsuario")?.Value; // Recuperar tipo de usuario
+
+    bool isAdmin = userId == "2"; // El ID 2 es el administrador
+    bool isSocio = tipoUsuario == "Socio"; // Si está en la tabla SOCIOS
+    bool isCliente = tipoUsuario == "Cliente"; // Si está en la tabla CLIENTES
+
+    if (isAdmin)
+    {
+        Layout = "~/Views/Shared/AdministradorLayout.cshtml";
+    }
+    else if (isSocio)
+    {
+        Layout = "~/Views/Shared/GeneralLayout.cshtml";
+    }
+    else if (isCliente)
+    {
+        Layout = "~/Views/Shared/UsuarioLayout.cshtml";
+    }
 }
 
 @{
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Eliminar</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>¿Deseas eliminar esta comparación?</h3>
 <div>
     <h4>Bancos</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.nombre)
+            <label> Nombre del banco:</label>
+            @* @Html.DisplayNameFor(model => model.nombre) *@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.nombre)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.interesBanco)
+            <label> Interes del banco:</label>
+            @* @Html.DisplayNameFor(model => model.interesBanco) *@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.interesBanco)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cantidad)
+            <label> Cantidad:</label>
+            @* @Html.DisplayNameFor(model => model.cantidad) *@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.cantidad)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.comparacion)
+            <label> Comparacion:</label>
+            @* @Html.DisplayNameFor(model => model.comparacion) *@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.comparacion)
         </dd>
-        <dt class = "col-sm-2">
+        @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.creditos)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.creditos.creditoID)
-        </dd>
+        </dd> *@
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.interes)
+            <label> Interes local:</label>
+            @* @Html.DisplayNameFor(model => model.interes) *@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.interes)
@@ -56,6 +80,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="BancoID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">Regresar al menu principal</a>
     </form>
 </div>

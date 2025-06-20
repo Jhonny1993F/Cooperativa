@@ -32,7 +32,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddDistributedMemoryCache(); // Utiliza memoria para almacenar sesiones
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(30); // Expiración de la sesión después de 30 minutos de inactividad
+    options.IdleTimeout = TimeSpan.FromMinutes(1); // Expiración de la sesión después de 30 minutos de inactividad
     options.Cookie.HttpOnly = true; // Asegura que la cookie de sesión sea solo accesible desde HTTP
     options.Cookie.IsEssential = true; // La sesión es esencial para la aplicación
 });

@@ -1,0 +1,201 @@
+﻿@* @model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Socios con Mayor Utilidad";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="get" action="@Url.Action("SociosConMayorUtilidad")">
+    <label for="fechaInicio">Fecha de Inicio</label>
+    <input type="date" id="fechaInicio" name="fechaInicio" required />
+
+    <label for="fechaFin">Fecha de Fin</label>
+    <input type="date" id="fechaFin" name="fechaFin" required />
+
+    <button type="submit">Buscar</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Socio</th>
+            <th>Utilidad Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SocioNombre</td>
+                <td>@item.UtilidadTotal</td>
+            </tr>
+        }
+    </tbody>
+</table>  *@
+
+@*  @model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Socios con Mayor Utilidad";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form method="get" action="@Url.Action("SociosConMayorUtilidad")">
+    <label for="fechaInicio">Fecha de Inicio</label>
+    <input type="date" id="fechaInicio" name="fechaInicio" required />
+
+    <label for="fechaFin">Fecha de Fin</label>
+    <input type="date" id="fechaFin" name="fechaFin" required />
+
+    <button type="submit">Buscar</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Socio</th>
+            <th>Utilidad Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SocioNombre</td>
+                <td>@item.UtilidadTotal</td>
+            </tr>
+        }
+    </tbody>
+</table> *@
+
+
+@* @model dynamic
+
+@{
+    ViewData["Title"] = "Socio con Mayor Utilidad";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<!-- Formulario para seleccionar las fechas -->
+<form method="get" action="@Url.Action("SociosConMayorUtilidad")">
+    <label for="fechaInicio">Fecha de Inicio</label>
+    <input type="date" id="fechaInicio" name="fechaInicio" required />
+
+    <label for="fechaFin">Fecha de Fin</label>
+    <input type="date" id="fechaFin" name="fechaFin" required />
+
+    <button type="submit">Buscar</button>
+</form>
+
+<!-- Mostrar mensaje si no hay resultados -->
+@if (ViewBag.NoResultsMessage != null)
+{
+    <div class="alert alert-warning">
+        @ViewBag.NoResultsMessage
+    </div>
+}
+else if (Model != null)
+{
+    <!-- Mostrar información del socio con mayor utilidad -->
+    <div>
+        <h3>Socio con Mayor Utilidad:</h3>
+        <p><strong>Nombre del Socio:</strong> @Model.SocioNombre</p>
+        <p><strong>Utilidad Total:</strong> @Model.UtilidadTotal</p>
+    </div>
+} *@
+
+
+@* @model dynamic
+
+@{
+    ViewData["Title"] = "Socio con Mayor Utilidad";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<!-- Formulario para seleccionar las fechas -->
+<form method="get" action="@Url.Action("SociosConMayorUtilidad")">
+    <label for="fechaInicio">Fecha de Inicio</label>
+    <input type="date" id="fechaInicio" name="fechaInicio" required />
+
+    <label for="fechaFin">Fecha de Fin</label>
+    <input type="date" id="fechaFin" name="fechaFin" required />
+
+    <button type="submit">Buscar</button>
+</form>
+
+<!-- Mostrar mensaje si no hay resultados -->
+@if (ViewBag.NoResultsMessage != null)
+{
+    <div class="alert alert-warning">
+        @ViewBag.NoResultsMessage
+    </div>
+}
+else if (Model != null)
+{
+    <!-- Mostrar información del socio con mayor utilidad -->
+    <div>
+        <h3>Socio con Mayor Utilidad:</h3>
+        <p><strong>Nombre del Socio:</strong> @Model.SocioNombre</p>
+        <p><strong>Utilidad Total:</strong> @Model.UtilidadTotal</p>
+    </div>
+} *@
+
+@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Socios con Mayor Utilidad";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<!-- Formulario para seleccionar las fechas -->
+<form method="get" action="@Url.Action("SociosConMayorUtilidad")">
+    <label for="fechaInicio">Fecha de Inicio</label>
+    <input type="date" id="fechaInicio" name="fechaInicio" required />
+
+    <label for="fechaFin">Fecha de Fin</label>
+    <input type="date" id="fechaFin" name="fechaFin" required />
+
+    <button type="submit">Buscar</button>
+</form>
+
+<!-- Mostrar mensaje si no hay resultados -->
+@if (ViewBag.NoResultsMessage != null)
+{
+    <div class="alert alert-warning">
+        @ViewBag.NoResultsMessage
+    </div>
+}
+else if (Model != null && Model.Any())
+{
+    <!-- Mostrar los 5 socios con mayores utilidades -->
+    <h3>Top 5 Socios con Mayor Utilidad</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Socio</th>
+                <th>Utilidad Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SocioNombre</td>
+                    <td>@item.UtilidadTotal</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+
+
+
+

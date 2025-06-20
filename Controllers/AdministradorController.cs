@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Cooperativa.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cooperativa.Controllers
 {
+    [Authorize]
     public class AdministradorController : Controller
     {
         public IActionResult Index()

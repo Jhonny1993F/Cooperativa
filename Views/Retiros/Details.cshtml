@@ -8,32 +8,36 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalles</h1>
 
 <div>
     <h4>Retiros</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cantidadRetiro)
+            @* @Html.DisplayNameFor(model => model.cantidadRetiro) *@
+            <label>Cantidad de retiro:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.cantidadRetiro)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.fechaRetiro)
+            @* @Html.DisplayNameFor(model => model.fechaRetiro) *@
+            <label>Fecha de retiro:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.fechaRetiro)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.detalleRetiro)
+            @* @Html.DisplayNameFor(model => model.detalleRetiro) *@
+            <label>Detalle del retiro:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.detalleRetiro)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.cliente)
+            @* @Html.DisplayNameFor(model => model.cliente) *@
+            <label>Cliente:</label>
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.cliente)
@@ -41,6 +45,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.retiroID">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.retiroID">Editar</a> |
+    <a asp-action="Index">Regresar al menu principal</a>
 </div>

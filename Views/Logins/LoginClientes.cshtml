@@ -13,13 +13,15 @@
         <form asp-action="LoginClientes" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="cliente" class="control-label">Cliente:</label>
-                <input asp-for="cliente" class="form-control" />
+                @* <label asp-for="cliente" class="control-label">Cliente:</label> *@
+                <label>Ingrese su nombre y apellido:</label>
+                <input asp-for="cliente" class="form-control" placeholder="Ejemplo: Iker Molina"/>
                 <span asp-validation-for="cliente" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="contraseña" class="control-label">Contraseña:</label>
-                <input asp-for="contraseña" class="form-control" type="password" />
+                @* <label asp-for="contraseña" class="control-label">Contraseña:</label> *@
+                <label>Ingrese su contraseña:</label>
+                <input asp-for="contraseña" class="form-control" type="password" placeholder="***"/>
                 <span asp-validation-for="contraseña" class="text-danger"></span>
             </div>
             <div class="form-group">
