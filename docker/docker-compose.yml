@@ -1,22 +1,26 @@
-version: '3.4'
-
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver-cooperativa
     environment:
       SA_PASSWORD: "YourStrong@Passw0rd"
       ACCEPT_EULA: "Y"
     ports:
       - "14330:1433"
+    volumes:
+      - sql_data:/var/opt/mssql
 
-  webapp:
+  cooperativa-app:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: cooperativa-app
     ports:
-      - "5000:5000"
-      - "5001:5001"
+      - "5000:8080"
     depends_on:
       - sqlserver
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+
+volumes:
+  sql_data:

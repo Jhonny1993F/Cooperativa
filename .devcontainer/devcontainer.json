@@ -1,0 +1,16 @@
+{
+  "name": "ASP.NET Core with SQL Server",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "ms-dotnettools.csharp",
+    "ms-azuretools.vscode-docker"
+  ],
+  "forwardPorts": [5000, 5001, 1433],
+  "postCreateCommand": "dotnet restore",
+  "remoteUser": "vscode"
+}
